@@ -116,7 +116,7 @@ def chunk(text, limit=TEXT_BLOCK_LIMIT):
     return blocks or [""]
 
 
-def build_blocks(status, title, body, url, date):
+def build_blocks(status, title, body, url, date, pdf_url=""):
     changed = status == "changed"
     blocks = [
         {
@@ -147,6 +147,18 @@ def build_blocks(status, title, body, url, date):
                 "value": url,
             }
         )
+    # 카카오워크 봇 API에는 파일 업로드 엔드포인트가 없어 PDF를 첨부할 수 없다.
+    # 대신 공개 리포지토리에 올린 PDF를 버튼 링크로 연다.
+    if pdf_url:
+        blocks.append(
+            {
+                "type": "button",
+                "text": "PDF 보기",
+                "style": "default",
+                "action_type": "open_system_browser",
+                "value": pdf_url,
+            }
+        )
     return blocks
 
 
@@ -157,6 +169,7 @@ def main():
     p.add_argument("--text", default="")
     p.add_argument("--text-file", default="")
     p.add_argument("--url", default="")
+    p.add_argument("--pdf-url", default="", help="PDF 파일 링크. 주면 'PDF 보기' 버튼이 붙는다")
     p.add_argument("--date", default="")
     p.add_argument("--dry-run", action="store_true")
     args = p.parse_args()
@@ -173,7 +186,7 @@ def main():
     if not body:
         raise SystemExit("본문이 비어 있습니다. --text / --text-file / stdin 중 하나로 넘기세요.")
 
-    blocks = build_blocks(args.status, args.title, body, args.url, args.date)
+    blocks = build_blocks(args.status, args.title, body, args.url, args.date, args.pdf_url)
     # 알림 목록과 푸시에 뜨는 대체 문구.
     fallback = (args.title or blocks[0]["text"]) + " — " + body.splitlines()[0]
 

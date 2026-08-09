@@ -133,6 +133,7 @@ python3 scripts/kakaowork_send.py --status unchanged \
 | `--title` | 헤더 문구 직접 지정 |
 | `--text` / `--text-file` / stdin | 본문. 셋 중 하나. 500자 넘으면 줄 단위로 자동 분할 |
 | `--url` | 하단 "리포트 열기" 버튼 링크 |
+| `--pdf-url` | 하단 "PDF 보기" 버튼 링크 |
 | `--date` | 기준일 표시 |
 | `--dry-run` | 발송하지 않고 페이로드만 출력 |
 
@@ -150,3 +151,42 @@ python3 scripts/kakaowork_send.py --status unchanged \
 | HTTP 401 / `invalid_token` | App Key 오타, 또는 앱 삭제·재발급됨 |
 | HTTP 400 `invalid_parameter` (email) | 카카오워크에 없는 이메일. 워크스페이스 계정 이메일이어야 함 |
 | 호출은 성공(`success: true`)인데 메시지가 안 옴 | 봇이 비활성 상태거나, 그룹방에 봇이 초대되지 않음 |
+
+---
+
+## PDF 발송에 대하여
+
+카카오워크 봇 Open API에는 **파일 업로드 엔드포인트가 없습니다.** 다음 후보를 모두
+확인했고 전부 `api_not_found` 를 반환합니다.
+
+```
+messages.upload_media  attachments.upload  files.upload
+media.upload           messages.upload     conversations.upload
+```
+
+`file` 블록이 요구하는 `attachment_id` 를 봇이 만들어낼 방법이 없으므로, 봇 메시지에
+PDF를 직접 첨부하는 것은 불가능합니다. 그래서 다음 방식을 씁니다.
+
+1. `scripts/make_pdf.py` 로 리포트 HTML을 A4 PDF로 변환
+2. `reports/solar-brief-2026.pdf` 로 공개 리포지토리에 커밋
+3. 카카오워크 메시지에 「PDF 보기」 버튼을 붙여 아래 링크를 연다
+
+```
+https://github.com/jaewon19811105-ui/-/blob/HEAD/reports/solar-brief-2026.pdf
+```
+
+`blob/HEAD` 는 항상 기본 브랜치의 최신 파일을 가리키므로 링크가 고정됩니다. GitHub이
+브라우저에서 PDF를 바로 렌더링하므로 모바일에서도 열립니다. 내려받기 링크가 필요하면
+`https://raw.githubusercontent.com/jaewon19811105-ui/-/HEAD/reports/solar-brief-2026.pdf`
+를 쓰면 됩니다.
+
+### PDF 변환 스크립트
+
+```bash
+python3 scripts/make_pdf.py reports/solar-brief-2026.html reports/solar-brief-2026.pdf
+```
+
+헤드리스 Chromium(`/opt/pw-browsers/chromium`)을 씁니다. 원본 HTML에는 `@media print`
+규칙이 없고 Chromium은 기본적으로 배경색을 인쇄하지 않으므로, 원본을 수정하지 않고
+임시 복사본에 인쇄용 CSS(`print-color-adjust: exact`, 표·제목 페이지 분리 방지,
+A4 여백, 마스트헤드 그리드 폭 조정)를 주입한 뒤 변환합니다.

@@ -8,6 +8,7 @@
 | 파일 | 내용 | 기준일 |
 |---|---|---|
 | [`reports/solar-brief-2026.html`](reports/solar-brief-2026.html) | 태양광 2026: 제도가 다시 쓰이는 해 (3부 · 12개 표 · 출처 55건) | 2026-08-09 |
+| [`reports/solar-brief-2026.pdf`](reports/solar-brief-2026.pdf) | 위 리포트의 인쇄용 PDF (A4 · 19쪽) | 2026-08-09 |
 
 발행된 아티팩트: <https://claude.ai/code/artifact/9fab249d-87e2-4450-bb0f-2e174c45eff4>
 
@@ -45,11 +46,17 @@
 ## 카카오워크 알림
 
 루틴은 **매일** 실행 결과를 카카오워크로 보냅니다. 갱신한 날은 3개 축 요약과 리포트
-링크를, 변동이 없는 날은 확인 결과 한 줄을 전송합니다.
+링크를, 변동이 없는 날은 확인 결과 한 줄을 전송합니다. 메시지 하단에는 「리포트 열기」
+(아티팩트)와 「PDF 보기」 두 개의 버튼이 붙습니다.
+
+카카오워크 봇 Open API에는 파일 업로드 엔드포인트가 없어 PDF를 메시지에 **첨부할 수는
+없습니다.** 대신 갱신 시 PDF를 생성해 이 공개 리포지토리에 커밋하고, 그 링크를 버튼으로
+엽니다.
 
 | 파일 | 용도 |
 |---|---|
 | [`scripts/kakaowork_send.py`](scripts/kakaowork_send.py) | 카카오워크 봇 발송 스크립트 (표준 라이브러리만 사용) |
+| [`scripts/make_pdf.py`](scripts/make_pdf.py) | 리포트 HTML → 인쇄용 PDF 변환 (헤드리스 Chromium) |
 | [`docs/kakaowork-setup.md`](docs/kakaowork-setup.md) | 봇 앱 키 발급 · 환경변수 · 도메인 허용 설정 절차 |
 
 발송에는 `KAKAOWORK_APP_KEY` 와 `KAKAOWORK_EMAIL`(또는 `KAKAOWORK_CONVERSATION_ID`)
