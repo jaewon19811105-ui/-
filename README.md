@@ -57,11 +57,13 @@
 |---|---|
 | [`scripts/kakaowork_send.py`](scripts/kakaowork_send.py) | 카카오워크 봇 발송 스크립트 (표준 라이브러리만 사용) |
 | [`scripts/make_pdf.py`](scripts/make_pdf.py) | 리포트 HTML → 인쇄용 PDF 변환 (헤드리스 Chromium) |
+| [`scripts/kakaowork_rooms.py`](scripts/kakaowork_rooms.py) | 대화방·구성원 조회, 단체 대화방 열기 (`conversation_id` 확인용) |
 | [`docs/kakaowork-setup.md`](docs/kakaowork-setup.md) | 봇 앱 키 발급 · 환경변수 · 도메인 허용 설정 절차 |
 
-발송에는 `KAKAOWORK_APP_KEY` 와 `KAKAOWORK_EMAIL`(또는 `KAKAOWORK_CONVERSATION_ID`)
-환경변수, 그리고 `api.kakaowork.com` 이그레스 허용이 필요합니다. 자세한 절차는 위 설정
-문서를 참고하세요.
+발송에는 `KAKAOWORK_APP_KEY` 와 `KAKAOWORK_CONVERSATION_ID`(단체방) 또는
+`KAKAOWORK_EMAIL`(개인 DM) 환경변수, 그리고 `api.kakaowork.com` 이그레스 허용이
+필요합니다. 두 값이 모두 있으면 `KAKAOWORK_CONVERSATION_ID` 가 우선합니다. 자세한
+절차는 위 설정 문서를 참고하세요.
 
 ## 주의
 

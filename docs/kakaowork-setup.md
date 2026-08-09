@@ -23,10 +23,12 @@
 
 **수신 대상 지정 방법 두 가지**
 
-- **개인 DM (권장)** — `KAKAOWORK_EMAIL` 에 본인의 카카오워크 계정 이메일을 넣으면
-  봇이 1:1 대화로 보냅니다. 별도 초대 불필요.
-- **그룹 대화방** — 해당 대화방에 봇을 초대한 뒤 `KAKAOWORK_CONVERSATION_ID` 에
-  대화방 ID를 넣습니다. 두 값이 모두 있으면 `KAKAOWORK_CONVERSATION_ID` 가 우선합니다.
+- **단체 대화방** — `KAKAOWORK_CONVERSATION_ID` 에 대화방 ID를 넣습니다.
+  아래 [단체 대화방으로 보내기](#단체-대화방으로-보내기) 참고.
+- **개인 DM** — `KAKAOWORK_EMAIL` 에 본인의 카카오워크 계정 이메일을 넣으면
+  봇이 1:1 대화로 보냅니다.
+
+두 값이 모두 있으면 `KAKAOWORK_CONVERSATION_ID` 가 우선합니다.
 
 ---
 
@@ -72,12 +74,11 @@ connect_rejected  gateway answered 403 to CONNECT  host: api.kakaowork.com:443
 
 ```text
 KAKAOWORK_APP_KEY=발급받은_앱_키
-KAKAOWORK_EMAIL=본인_카카오워크_계정_이메일
+KAKAOWORK_CONVERSATION_ID=단체_대화방_ID
 ```
 
-그룹 대화방으로 받으려면 `KAKAOWORK_EMAIL` 대신 `KAKAOWORK_CONVERSATION_ID` 를 넣고,
-해당 방에 봇을 초대한다. 값에 `#` 이 들어가면 따옴표로 감싼다(감싸지 않으면 `#` 뒤가
-주석으로 잘린다).
+1:1로 받으려면 `KAKAOWORK_CONVERSATION_ID` 대신 `KAKAOWORK_EMAIL=본인_이메일` 을 넣는다.
+값에 `#` 이 들어가면 따옴표로 감싼다(감싸지 않으면 `#` 뒤가 주석으로 잘린다).
 
 입력 후 저장한다.
 
@@ -190,3 +191,44 @@ python3 scripts/make_pdf.py reports/solar-brief-2026.html reports/solar-brief-20
 규칙이 없고 Chromium은 기본적으로 배경색을 인쇄하지 않으므로, 원본을 수정하지 않고
 임시 복사본에 인쇄용 CSS(`print-color-adjust: exact`, 표·제목 페이지 분리 방지,
 A4 여백, 마스트헤드 그리드 폭 조정)를 주입한 뒤 변환합니다.
+
+---
+
+## 단체 대화방으로 보내기
+
+`scripts/kakaowork_rooms.py` 로 대화방 ID를 찾거나 새로 연다. 발송은 하지 않고 조회만
+하는 보조 도구다.
+
+```bash
+# 워크스페이스 구성원 (이메일 → user_id)
+python3 scripts/kakaowork_rooms.py users
+
+# 봇이 참여 중인 대화방 목록
+python3 scripts/kakaowork_rooms.py rooms
+
+# 단체 대화방 열기 — 없으면 생성, 이미 있으면 기존 방을 그대로 반환
+python3 scripts/kakaowork_rooms.py open a@corp.com b@corp.com
+```
+
+`open` 은 `conversations.open` 에 `user_ids` 를 복수로 넘긴다. 반환된
+`conversation_id` 를 환경변수에 넣으면 그 방으로 발송된다.
+
+```text
+KAKAOWORK_CONVERSATION_ID=1006710354409588
+```
+
+`KAKAOWORK_EMAIL` 이 함께 있어도 `KAKAOWORK_CONVERSATION_ID` 가 우선하므로, 개인 DM에서
+단체방으로 바꿀 때 이메일 줄을 지울 필요는 없다. 되돌리려면
+`KAKAOWORK_CONVERSATION_ID` 줄만 지우면 된다.
+
+**카카오워크에서 직접 만든 방에 보내려면** 그 방에 봇을 초대한 뒤 `rooms` 명령으로
+`conversation_id` 를 확인한다. 봇이 참여하지 않은 방은 목록에 나오지 않는다.
+
+봇이 쓸 수 없는 대화방 API도 있다. 아래는 모두 `api_not_found` 다.
+
+```
+conversations.create   conversations.invite   conversations.info   conversations.users
+```
+
+즉 봇은 **자기가 참여하는 방을 `conversations.open` 으로 여는 것만** 가능하고, 기존 방에
+스스로를 초대하거나 방 이름을 바꿀 수는 없다.
