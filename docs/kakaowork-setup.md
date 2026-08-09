@@ -117,7 +117,7 @@ python3 scripts/kakaowork_send.py --status unchanged --text "설정 점검" --dr
 python3 scripts/kakaowork_send.py --status unchanged \
   --title "태양광 브리프 · 연동 테스트" \
   --text "카카오워크 발송 설정이 정상 동작합니다." \
-  --url "https://claude.ai/code/artifact/9fab249d-87e2-4450-bb0f-2e174c45eff4"
+  --pdf-url "https://github.com/jaewon19811105-ui/-/blob/HEAD/reports/solar-brief-2026.pdf"
 ```
 
 카카오워크에 메시지가 도착하면 완료입니다.
@@ -133,8 +133,7 @@ python3 scripts/kakaowork_send.py --status unchanged \
 | `--status changed\|unchanged` | 필수. 헤더 색과 기본 제목이 달라집니다 (파랑 / 노랑) |
 | `--title` | 헤더 문구 직접 지정 |
 | `--text` / `--text-file` / stdin | 본문. 셋 중 하나. 500자 넘으면 줄 단위로 자동 분할 |
-| `--url` | 하단 "리포트 열기" 버튼 링크 |
-| `--pdf-url` | 하단 "PDF 보기" 버튼 링크 |
+| `--pdf-url` | 하단 "PDF 보기" 버튼 링크. 메시지의 유일한 버튼이다 |
 | `--date` | 기준일 표시 |
 | `--dry-run` | 발송하지 않고 페이로드만 출력 |
 
@@ -157,20 +156,31 @@ python3 scripts/kakaowork_send.py --status unchanged \
 
 ## PDF 발송에 대하여
 
-카카오워크 봇 Open API에는 **파일 업로드 엔드포인트가 없습니다.** 다음 후보를 모두
-확인했고 전부 `api_not_found` 를 반환합니다.
+### 현재 상태 — 링크 방식
+
+PDF 파일을 메시지에 직접 첨부하는 것이 목표지만, 아직 링크 방식이다. 업로드
+엔드포인트는 **찾았으나 파라미터 스키마를 확정하지 못했다.**
 
 ```
-messages.upload_media  attachments.upload  files.upload
-media.upload           messages.upload     conversations.upload
+POST /v1/conversations/{conversation_id}/upload
+  → {"error":{"code":"missing_parameter","message":"attachments, metas is missing."}}
 ```
 
-`file` 블록이 요구하는 `attachment_id` 를 봇이 만들어낼 방법이 없으므로, 봇 메시지에
-PDF를 직접 첨부하는 것은 불가능합니다. 그래서 다음 방식을 씁니다.
+- `attachments[]` (multipart 파일) + `metas` (JSON 배열, 파일 개수와 길이 일치) 까지는 확인됨
+- `metas` 원소의 스키마를 못 맞춰 계속 `meta is invalid` 가 난다.
+  `{name,size}` `{type,name,size}` `{content_type}` `{width,height}` `{filename,filesize}`
+  `{}` `null` 등 모두 거부됨
+- 공식 문서 `docs.kakaoi.ai` 가 이그레스 정책에서 차단되어 스키마를 확인할 수 없다.
+  이 도메인을 허용 목록에 추가하면 확정할 수 있다.
+
+`dot` 표기 엔드포인트(`conversations.upload`, `attachments.upload`, `files.upload` 등
+28종)는 모두 `api_not_found` 이므로 경로는 위 RESTful 형태가 맞다.
+
+그동안은 다음 방식을 쓴다.
 
 1. `scripts/make_pdf.py` 로 리포트 HTML을 A4 PDF로 변환
 2. `reports/solar-brief-2026.pdf` 로 공개 리포지토리에 커밋
-3. 카카오워크 메시지에 「PDF 보기」 버튼을 붙여 아래 링크를 연다
+3. 카카오워크 메시지에 「PDF 보기」 버튼을 붙여 아래 링크를 연다 (메시지의 유일한 버튼)
 
 ```
 https://github.com/jaewon19811105-ui/-/blob/HEAD/reports/solar-brief-2026.pdf

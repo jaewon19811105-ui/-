@@ -13,7 +13,7 @@
 사용 예
   # 갱신 있음
   python3 scripts/kakaowork_send.py --status changed \
-      --url "https://claude.ai/code/artifact/9fab..." --text-file summary.md
+      --pdf-url "https://github.com/.../solar-brief-2026.pdf" --text-file summary.md
 
   # 변동 없음
   python3 scripts/kakaowork_send.py --status unchanged \
@@ -116,7 +116,7 @@ def chunk(text, limit=TEXT_BLOCK_LIMIT):
     return blocks or [""]
 
 
-def build_blocks(status, title, body, url, date, pdf_url=""):
+def build_blocks(status, title, body, date, pdf_url=""):
     changed = status == "changed"
     blocks = [
         {
@@ -137,24 +137,12 @@ def build_blocks(status, title, body, url, date, pdf_url=""):
     blocks.append({"type": "divider"})
     for part in chunk(body):
         blocks.append({"type": "text", "text": part, "markdown": True})
-    if url:
-        blocks.append(
-            {
-                "type": "button",
-                "text": "리포트 열기",
-                "style": "primary" if changed else "default",
-                "action_type": "open_system_browser",
-                "value": url,
-            }
-        )
-    # 카카오워크 봇 API에는 파일 업로드 엔드포인트가 없어 PDF를 첨부할 수 없다.
-    # 대신 공개 리포지토리에 올린 PDF를 버튼 링크로 연다.
     if pdf_url:
         blocks.append(
             {
                 "type": "button",
                 "text": "PDF 보기",
-                "style": "default",
+                "style": "primary" if changed else "default",
                 "action_type": "open_system_browser",
                 "value": pdf_url,
             }
@@ -168,7 +156,6 @@ def main():
     p.add_argument("--title", default="")
     p.add_argument("--text", default="")
     p.add_argument("--text-file", default="")
-    p.add_argument("--url", default="")
     p.add_argument("--pdf-url", default="", help="PDF 파일 링크. 주면 'PDF 보기' 버튼이 붙는다")
     p.add_argument("--date", default="")
     p.add_argument("--dry-run", action="store_true")
@@ -186,7 +173,7 @@ def main():
     if not body:
         raise SystemExit("본문이 비어 있습니다. --text / --text-file / stdin 중 하나로 넘기세요.")
 
-    blocks = build_blocks(args.status, args.title, body, args.url, args.date, args.pdf_url)
+    blocks = build_blocks(args.status, args.title, body, args.date, args.pdf_url)
     # 알림 목록과 푸시에 뜨는 대체 문구.
     fallback = (args.title or blocks[0]["text"]) + " — " + body.splitlines()[0]
 
