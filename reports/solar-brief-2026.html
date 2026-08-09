@@ -1,0 +1,1400 @@
+<title>태양광 산업 통합 브리프 2026 — 법령·업체·기술</title>
+<style>
+  :root {
+    --bg: #EEF0F4;
+    --surface: #FFFFFF;
+    --surface-2: #F6F8FA;
+    --ink: #11161C;
+    --ink-2: #37414D;
+    --muted: #616C7A;
+    --line: #D6DBE3;
+    --line-strong: #B7C0CB;
+    --accent: #A85F09;
+    --accent-2: #7C4405;
+    --accent-soft: #F6EAD6;
+    --ok: #14684A;
+    --ok-soft: #E2F0E9;
+    --pend: #29549A;
+    --pend-soft: #E4EAF7;
+    --risk: #9C2E2E;
+    --risk-soft: #F7E6E6;
+    --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 8px 24px -16px rgba(16, 24, 40, .28);
+
+    --sans: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard",
+            "Malgun Gothic", "맑은 고딕", "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+            "D2Coding", "Liberation Mono", monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1117;
+      --surface: #151B23;
+      --surface-2: #1A212B;
+      --ink: #E9EDF3;
+      --ink-2: #C3CBD5;
+      --muted: #93A0AE;
+      --line: #262F3A;
+      --line-strong: #3A4552;
+      --accent: #EFB255;
+      --accent-2: #F6CB88;
+      --accent-soft: #2E2410;
+      --ok: #57C695;
+      --ok-soft: #12291F;
+      --pend: #8FB4EE;
+      --pend-soft: #152034;
+      --risk: #E68B8B;
+      --risk-soft: #301A1A;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -16px rgba(0, 0, 0, .8);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0D1117;
+    --surface: #151B23;
+    --surface-2: #1A212B;
+    --ink: #E9EDF3;
+    --ink-2: #C3CBD5;
+    --muted: #93A0AE;
+    --line: #262F3A;
+    --line-strong: #3A4552;
+    --accent: #EFB255;
+    --accent-2: #F6CB88;
+    --accent-soft: #2E2410;
+    --ok: #57C695;
+    --ok-soft: #12291F;
+    --pend: #8FB4EE;
+    --pend-soft: #152034;
+    --risk: #E68B8B;
+    --risk-soft: #301A1A;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -16px rgba(0, 0, 0, .8);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+  }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    padding: 56px 0 28px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .eyebrow span.sep { color: var(--line-strong); }
+
+  h1 {
+    font-size: clamp(30px, 5.2vw, 50px);
+    line-height: 1.18;
+    letter-spacing: -.022em;
+    font-weight: 800;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+
+  .standfirst {
+    font-size: clamp(15px, 1.6vw, 18px);
+    color: var(--ink-2);
+    max-width: 62ch;
+    margin: 0 0 30px;
+  }
+
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .meta div {
+    background: var(--surface);
+    padding: 12px 14px;
+  }
+  .meta dt {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 4px;
+  }
+  .meta dd {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- toc ---------- */
+
+  nav.toc {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    margin: 0 -24px 0;
+    padding: 10px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    align-items: baseline;
+  }
+  nav.toc a {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 4px 2px;
+    border-bottom: 2px solid transparent;
+  }
+  nav.toc a:hover, nav.toc a:focus-visible {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+  nav.toc a b { color: var(--accent); font-weight: 700; }
+
+  /* ---------- key numbers ---------- */
+
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(178px, 1fr));
+    gap: 12px;
+    margin: 34px 0 0;
+  }
+  .tile {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--accent);
+    padding: 16px 16px 14px;
+    box-shadow: var(--shadow);
+  }
+  .tile .k {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .tile .v {
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+    display: block;
+  }
+  .tile .v small { font-size: 15px; font-weight: 700; color: var(--ink-2); }
+  .tile .n {
+    display: block;
+    margin-top: 7px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ---------- sections ---------- */
+
+  section.part { margin-top: 68px; scroll-margin-top: 60px; }
+
+  .part-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    border-top: 2px solid var(--ink);
+    padding-top: 16px;
+    margin-bottom: 26px;
+  }
+  .part-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--surface);
+    background: var(--accent);
+    padding: 3px 9px;
+    letter-spacing: .06em;
+    flex: none;
+    margin-top: 7px;
+  }
+  .part-head h2 {
+    font-size: clamp(23px, 3vw, 31px);
+    letter-spacing: -.02em;
+    font-weight: 800;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  .part-head p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14.5px;
+    max-width: 66ch;
+  }
+
+  h3 {
+    font-size: 19px;
+    font-weight: 750;
+    letter-spacing: -.012em;
+    margin: 40px 0 12px;
+    padding-left: 12px;
+    border-left: 3px solid var(--accent);
+    text-wrap: balance;
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 26px 0 8px;
+    color: var(--ink);
+  }
+  p { margin: 0 0 14px; max-width: 74ch; }
+  ul { margin: 0 0 16px; padding-left: 20px; max-width: 74ch; }
+  li { margin-bottom: 7px; }
+  li::marker { color: var(--accent); }
+  strong { font-weight: 700; }
+  a { color: var(--accent-2); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .num { font-variant-numeric: tabular-nums; font-family: var(--mono); font-size: .94em; }
+
+  /* ---------- tables ---------- */
+
+  .tablewrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    margin: 0 0 18px;
+    box-shadow: var(--shadow);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 640px;
+    font-size: 13.5px;
+  }
+  caption {
+    caption-side: top;
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 11px 14px 9px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+  thead th {
+    text-align: left;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line-strong);
+    background: var(--surface-2);
+    white-space: nowrap;
+  }
+  tbody td, tbody th {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  tbody th {
+    text-align: left;
+    font-weight: 700;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+  tbody tr:hover td, tbody tr:hover th { background: var(--surface-2); }
+  td.n, th.n { font-variant-numeric: tabular-nums; font-family: var(--mono); font-size: 12.5px; }
+
+  /* ---------- chips ---------- */
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    padding: 2px 7px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .chip::before {
+    content: "";
+    width: 5px; height: 5px;
+    background: currentColor;
+    border-radius: 50%;
+    flex: none;
+  }
+  .chip.ok   { color: var(--ok);   background: var(--ok-soft); }
+  .chip.pend { color: var(--pend); background: var(--pend-soft); }
+  .chip.risk { color: var(--risk); background: var(--risk-soft); }
+  .chip.flat { color: var(--muted); background: var(--surface-2); }
+
+  /* ---------- callout ---------- */
+
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    padding: 15px 18px;
+    margin: 0 0 20px;
+  }
+  .callout .lbl {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+
+  .callout.warn { border-left-color: var(--risk); }
+  .callout.warn .lbl { color: var(--risk); }
+
+  /* ---------- timeline ---------- */
+
+  .timeline {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0 0 0 4px;
+    max-width: none;
+    border-left: 2px solid var(--line);
+  }
+  .timeline li {
+    position: relative;
+    padding: 0 0 20px 24px;
+    margin: 0;
+  }
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -7px; top: 7px;
+    width: 10px; height: 10px;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+  }
+  .timeline li.done::before { background: var(--accent); }
+  .timeline .date {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: .06em;
+    color: var(--accent);
+    font-weight: 700;
+    display: block;
+  }
+  .timeline .what { font-weight: 650; font-size: 15px; }
+  .timeline .desc { color: var(--muted); font-size: 13.5px; display: block; }
+
+  /* ---------- source list ---------- */
+
+  .sources { margin-top: 68px; border-top: 2px solid var(--ink); padding-top: 20px; }
+  .sources ol {
+    columns: 2;
+    column-gap: 36px;
+    font-size: 12.5px;
+    color: var(--muted);
+    padding-left: 18px;
+    margin: 0;
+    max-width: none;
+  }
+  .sources li { margin-bottom: 7px; break-inside: avoid; }
+  .sources a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+  .sources a:hover { color: var(--accent-2); }
+
+  footer.note {
+    margin-top: 34px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--muted);
+    max-width: 74ch;
+  }
+
+  @media (max-width: 680px) {
+    .part-head { flex-direction: column; gap: 10px; }
+    .part-num { margin-top: 0; }
+    .sources ol { columns: 1; }
+    .wrap { padding: 0 16px 72px; }
+    nav.toc { margin: 0 -16px; padding: 10px 16px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">
+      <span>산업 통합 브리프</span><span class="sep">/</span>
+      <span>규제 · 시장 · 기술</span><span class="sep">/</span>
+      <span>대한민국 · 2026</span>
+    </p>
+    <h1>태양광 2026: 제도가 다시 쓰이는 해</h1>
+    <p class="standfirst">
+      이격거리 규제의 국가 기준 편입, RPS 폐지와 장기 경매제 전환, 영농형 태양광 법제화가
+      한 해에 동시에 진행 중입니다. 설치량은 4GW 안팎에서 정체된 반면 사업 구조·경쟁축·기술
+      로드맵은 전면 재편되고 있습니다. 법령·업체·기술 세 축으로 정리했습니다.
+    </p>
+    <dl class="meta">
+      <div><dt>작성일</dt><dd>2026-08-09</dd></div>
+      <div><dt>조사 범위</dt><dd>국내 중심 + 글로벌</dd></div>
+      <div><dt>구성</dt><dd>3부 · 12개 표</dd></div>
+      <div><dt>기준 시점</dt><dd>2026년 8월 초</dd></div>
+      <div><dt>출처</dt><dd>공개 자료 30여 건</dd></div>
+    </dl>
+  </header>
+
+  <nav class="toc" aria-label="목차">
+    <a href="#part1"><b>01</b> 법령 · 규제</a>
+    <a href="#part2"><b>02</b> 설치업체 동향</a>
+    <a href="#part3"><b>03</b> 신기술 · 신제품</a>
+    <a href="#calendar"><b>04</b> 시행 캘린더</a>
+    <a href="#implications"><b>05</b> 리스크 · 시사점</a>
+    <a href="#sources"><b>06</b> 출처</a>
+  </nav>
+
+  <div class="tiles">
+    <div class="tile">
+      <span class="k">2026 국내 설치 전망</span>
+      <span class="v">4.0<small> GW</small></span>
+      <span class="n">2024년 3.15GW → 2025년 3.5GW → 2026년 4.0GW</span>
+    </div>
+    <div class="tile">
+      <span class="k">고정가격 상한 (육지)</span>
+      <span class="v">147.7<small> 원/kWh</small></span>
+      <span class="n">2026 상반기, 사상 첫 140원대 · 전년비 약 5% 하락</span>
+    </div>
+    <div class="tile">
+      <span class="k">2026 RPS 의무비율</span>
+      <span class="v">15.0<small> %</small></span>
+      <span class="n">2027년 1월 목표로 제도 폐지 · 경매제 전환 진행</span>
+    </div>
+    <div class="tile">
+      <span class="k">태양광 목표 (11차 전기본)</span>
+      <span class="v">77.2<small> GW</small></span>
+      <span class="n">2038년 기준 · 재생에너지 발전비중 29.2%</span>
+    </div>
+    <div class="tile">
+      <span class="k">국산 셀 내수 점유율</span>
+      <span class="v">3.9<small> %</small></span>
+      <span class="n">모듈은 40%대(2024) · 셀 단계 공급망 공백</span>
+    </div>
+  </div>
+
+  <!-- =========================== PART 1 =========================== -->
+  <section class="part" id="part1">
+    <div class="part-head">
+      <span class="part-num">01</span>
+      <div>
+        <h2>법령 · 규제 동향</h2>
+        <p>2026년은 재생에너지 관련 법체계가 30년 만에 재편되는 해입니다. 근거법 제명 변경,
+           입지규제의 국가 기준화, 시장제도(RPS)의 폐지·전환, 영농형 태양광 단독법 제정이
+           동시에 진행됩니다.</p>
+      </div>
+    </div>
+
+    <h3>1-1. 근거법 전면 개편 — 「재생에너지법」의 탄생</h3>
+    <p>
+      2026년 2월 12일 국회 본회의에서 「신에너지 및 재생에너지 개발·이용·보급 촉진법」
+      개정안이 통과됐습니다. 수소·연료전지 등 <strong>'신에너지' 조항은 수소법으로 이관</strong>되고,
+      법률 제명은 <strong>「재생에너지 개발·이용·보급 촉진법」</strong>으로 바뀝니다. 30년 가까이
+      한 법에 묶여 있던 신에너지와 재생에너지가 분리되면서, 재생에너지 정책의 근거·목표·
+      지원체계가 독립 법률로 관리됩니다.
+    </p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>표 1-1. 재생에너지법 개편 주요 내용</caption>
+        <thead>
+          <tr><th scope="col">항목</th><th scope="col">개정 전</th><th scope="col">개정 후</th><th scope="col">실무 영향</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">법률 제명</th>
+            <td>신에너지 및 재생에너지 개발·이용·보급 촉진법</td>
+            <td>재생에너지 개발·이용·보급 촉진법</td>
+            <td>인용 법령·계약서·사규 문구 전면 정비 필요</td>
+          </tr>
+          <tr>
+            <th scope="row">신에너지 규율</th>
+            <td>동일 법에서 함께 규율</td>
+            <td>수소·연료전지는 수소법으로 이관</td>
+            <td>연료전지 사업은 별도 트랙으로 분리 관리</td>
+          </tr>
+          <tr>
+            <th scope="row">이격거리</th>
+            <td>지자체 조례에 사실상 백지위임</td>
+            <td>원칙적 적용 불가 + 법정 예외구역만 허용</td>
+            <td>입지 검토의 예측 가능성 대폭 상승</td>
+          </tr>
+          <tr>
+            <th scope="row">적용 배제</th>
+            <td>구분 없음</td>
+            <td>주민참여형·지붕형·자가소비용은 이격거리 전면 배제</td>
+            <td>지붕형/자가소비 사업 모델의 상대적 우위 확대</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>1-2. 이격거리 규제 — '철폐'가 아니라 '상한의 명문화'</h3>
+    <p>
+      가장 논란이 컸던 지점입니다. 기후에너지환경부는 2026년 6월 29일
+      「재생에너지 개발·이용·보급 촉진법 시행령·시행규칙 개정안」을 입법예고하고
+      7월 8일까지 의견을 수렴했습니다. 핵심은 <strong>지자체 조례가 설정할 수 있는 이격거리의
+      상한을 국가가 정하는</strong> 구조입니다.
+    </p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>표 1-2. 이격거리 시행령안 기준 (2026.6.29 입법예고)</caption>
+        <thead>
+          <tr><th scope="col">발전원</th><th scope="col">주거지역 기준</th><th scope="col">도로 기준</th><th scope="col">최소 거리 규정</th><th scope="col">평가</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">태양광</th>
+            <td class="n">최대 200m 이내</td>
+            <td class="n">최대 100m 이내</td>
+            <td>—</td>
+            <td><span class="chip ok">완화</span> 기존 과도 조례 대비 상한 축소</td>
+          </tr>
+          <tr>
+            <th scope="row">풍력</th>
+            <td class="n">최대 1,000m 이내</td>
+            <td class="n">최대 1,000m 이내</td>
+            <td>설비 높이의 2배 이상</td>
+            <td><span class="chip risk">강화 체감</span> 최소거리 하한 신설</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul>
+      <li><strong>사업자 입장</strong> — 지자체별로 제각각이던 조례가 국가 상한 안으로 들어오면서
+          입지 사전검토의 불확실성이 줄었습니다. 특히 도로 인접부지의 사업화 가능성이 열립니다.</li>
+      <li><strong>반대 논리</strong> — 농촌 지역에서는 "상한을 정했을 뿐 규제가 없어진 것이 아니며,
+          오히려 이격거리를 법에 명문화해 정당화했다"는 반발이 있습니다. 재생에너지 기본계획
+          단계에서 이격거리 기준이 재등장한 데 대한 업계 비판도 제기됐습니다.</li>
+      <li><strong>정부 해명</strong> — 기후에너지환경부는 이번 조치가 "안전규제 완화가 아니라
+          지자체별로 상이하고 과도한 <em>입지규제의 합리화</em>"라는 입장을 공식 설명자료로 냈습니다.</li>
+    </ul>
+
+    <div class="callout">
+      <span class="lbl">실무 포인트</span>
+      <p>이격거리 배제 대상(주민참여형·지붕형·자가소비형)에 해당하는지 여부가 인허가 난이도를
+         가르는 1차 분기점이 됩니다. 지상형 단독 사업이라도 주민참여 지분 구조를 설계하면
+         규제 트랙 자체가 바뀔 수 있으므로, 부지 확보 이전 단계에서 사업구조를 결정하는 것이 유리합니다.</p>
+    </div>
+
+    <h3>1-3. RPS 폐지와 '장기 경매제' 전환 — 시장제도의 근본 변경</h3>
+    <p>
+      2026년 5월 19일 국회 기후에너지환경노동위원회에서 RPS 폐지 법안이 통과됐고, 정부는
+      <strong>2027년 1월 시행</strong>을 목표로 제도 설계에 착수했습니다. 정부가 연도별 재생에너지
+      목표를 정하면 그 용량만큼 <strong>입찰시장을 개설하고 낙찰 사업자와 장기계약</strong>을 체결하는
+      구조로 바뀝니다. REC 현물시장은 <strong>2030년 완전 폐지</strong> 수순입니다.
+    </p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>표 1-3. RPS 체계 vs 경매(장기계약) 체계</caption>
+        <thead>
+          <tr><th scope="col">구분</th><th scope="col">현행 RPS</th><th scope="col">전환 후 경매제</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">의무 주체</th><td>500MW 이상 설비 보유 발전사업자</td><td>공공 발전자회사는 의무 유지 / 민간은 '목표관리 대상자'</td></tr>
+          <tr><th scope="row">미이행 제재</th><td>과징금</td><td>목표 미달 시 과태료 등으로 이행 유도</td></tr>
+          <tr><th scope="row">가격 결정</th><td>REC 현물시장 + 고정가격계약 병행</td><td>정부 개설 입찰시장 → 장기계약</td></tr>
+          <tr><th scope="row">발전원 경쟁</th><td>태양광·풍력이 단일 REC 시장에서 경쟁</td><td>발전원별 LCOE 반영 <strong>별도 상한가</strong> 체계</td></tr>
+          <tr><th scope="row">REC 가중치</th><td>설비 유형별 가중치 적용</td><td>가중치 개념 폐지 방향 (에공단 Q&amp;A로 정리 중)</td></tr>
+          <tr><th scope="row">현물시장</th><td>상시 운영</td><td><span class="chip risk">2030년 폐지</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>고정가격계약 경쟁입찰 (2026 상반기)</h4>
+    <ul>
+      <li>상한가격: <span class="num">육지 147,686원/kWh · 제주 152,092원/kWh</span> — 사상 첫 140원대,
+          전년 대비 약 5% 하락</li>
+      <li><strong>탄소검증모듈 우대가격</strong>: 1등급 <span class="num">+16원/kWh</span>,
+          2등급 <span class="num">+7원/kWh</span> — 국내 공급망 기여도가 낙찰 경쟁력에 직결</li>
+      <li>RPS 폐지를 앞둔 사실상 마지막 국면의 입찰로, "막차 수요"와 "사업성 외면 가격"이라는
+          평가가 동시에 나옵니다.</li>
+    </ul>
+
+    <h3>1-4. 영농형 태양광 — 단독법 제정으로 제도권 진입</h3>
+    <p>
+      「영농형 태양광 발전사업의 활성화 및 지원에 관한 법률」이 2026년 5월 7일 국회를 통과해
+      6월 16일 공포, <strong>2026년 12월 17일 시행</strong>됩니다. 농지법상 <strong>타용도 일시사용허가</strong>
+      방식을 뼈대로 삼아, 하부는 경작·상부는 발전이라는 이중 구조를 법제화했습니다.
+    </p>
+
+    <div class="tablewrap">
+      <table>
+        <caption>표 1-4. 영농형 태양광법의 5대 규율 영역</caption>
+        <thead>
+          <tr><th scope="col">영역</th><th scope="col">규율 취지</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">사업주체</th><td>농업인 중심 구조 — 외부 자본의 농지 잠식 방지</td></tr>
+          <tr><th scope="row">허용지역</th><td>입지 요건을 법정화해 무분별 확산 차단</td></tr>
+          <tr><th scope="row">사업기간</th><td>일시사용허가 기간과 연동, 원상회복 전제</td></tr>
+          <tr><th scope="row">임차농 보호</th><td>지주-임차농 간 이익배분·영농 지속권 보장</td></tr>
+          <tr><th scope="row">영농 이행 의무</th><td>실제 경작 이행 여부 점검 — 미이행 시 제재</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      병행해 <strong>농지법 개정안이 2026년 8월 28일 시행</strong>됩니다(일부 조항은 별도 일정).
+      농지법 위반 시 <strong>처분명령을 의무화</strong>하는 내용이 포함돼, 영농형 사업의 사후 관리가
+      강해집니다. 즉 <em>진입은 열되 이행은 조인다</em>가 이번 입법의 성격입니다.
+    </p>
+
+    <h3>1-5. 계통 규제 — 실질적 최대 병목</h3>
+    <ul>
+      <li><strong>계통관리변전소</strong> — 계통 포화 지역(동해안 등)에서는 접속 가능 시기를 전제로 한
+          발전사업허가만 가능한 구조입니다. 공사기간이 짧은 태양광은 접속 가능일 직전까지
+          사업 추진이 사실상 어려워지는 부작용이 지적됩니다.</li>
+      <li><strong>출력제어 상시화</strong> — 제주는 출력제어 건수가 2015년 3건에서 최근 연 130~140건대로
+          급증했고, 호남권은 5월 중 20일 가까이 연일 출력제어가 발생했습니다. 이제 발전량이 아니라
+          <strong>'수용 가능한 발전량'</strong>이 수익을 결정합니다.</li>
+      <li><strong>배전망 ESS 구축지원</strong> — 9개 사업자(VPP랩·LG에너지솔루션·한전KDN 등) 선정,
+          <strong>2030년까지 700MW</strong> 구축 목표. 호남·제주 접속 여력 확대의 핵심 수단입니다.</li>
+      <li><strong>봄철 태양광 연계 ESS 운영방안(2026)</strong> — 대상 PCS 2MW 이상, 운영기간 2/28~6/14,
+          충·방전 시간대를 기존 06~15시 충전/16~23시 방전에서
+          <strong>10~16시 충전 / 17~24시 방전</strong>으로 변경.</li>
+      <li><strong>송전망 확충</strong> — 서해안 2025년 12월, 동해안 2026년 6월 준공 목표 송전선로,
+          제주-육지 제3연계선 추진.</li>
+    </ul>
+
+    <h3>1-6. 분산에너지 활성화 특별법</h3>
+    <p>
+      ①전력계통영향평가 ②분산에너지특화지역 ③통합발전소(VPP) ④분산에너지 설치의무
+      ⑤배전사업자 역할 ⑥지역별 차등 전기요금 근거의 6대 축으로 구성됩니다. 특화지역의 핵심은
+      <strong>구역 내 전력 직접거래 허용</strong>으로, 발전·판매 겸업이 가능해집니다. 2025년 말 기준
+      7개 특구가 지정됐고 울산·포항이 추가되며 부산·제주·전남·경기와 함께 지역 직거래 시장이
+      본격화되고 있습니다.
+    </p>
+
+    <h3>1-7. 환경·자원순환 — 폐모듈 EPR</h3>
+    <ul>
+      <li>태양광 폐모듈이 <strong>2026년 1월부터 EPR(생산자책임재활용제도)</strong> 대상에 편입됐습니다.</li>
+      <li>폐패널 발생량 전망: <span class="num">2025년 1,223톤 → 2032년 9,632톤</span></li>
+      <li>기술적으로는 구성 소재 <strong>최대 98% 재활용</strong> 가능하다는 것이 업계 평가입니다.</li>
+      <li><span class="chip risk">쟁점</span> 2025년 8월 환경부가 태양광재활용공제조합을 불인가하면서
+          운영 주체·분담금 체계가 아직 정리 중입니다. 철거 주체 규정이 모호하다는 지적도 이어집니다.</li>
+    </ul>
+
+    <h3>1-8. 설비·시공 관련 규제</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 1-5. 시공·설비 규제 체계 요약</caption>
+        <thead>
+          <tr><th scope="col">제도</th><th scope="col">근거·운영</th><th scope="col">사업자 영향</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">KS인증</th>
+            <td>한국에너지공단 신재생에너지센터<br>신청 → 공장심사 → 성능검사 → 인증서 발급 → 보험(공제) 가입 → 인증계약</td>
+            <td>보조금 사업·의무설치 시장 진입의 전제조건. 우선구매 등 정책 지원 연계</td>
+          </tr>
+          <tr>
+            <th scope="row">원별 시공기준·가이드라인</th>
+            <td>「신·재생에너지 설비의 지원 등에 관한 규정」 및 지원·설치·관리 기준</td>
+            <td>시공 품질·감리·검수 기준의 실질적 준거</td>
+          </tr>
+          <tr>
+            <th scope="row">보급사업 참여기업 등록</th>
+            <td>공단 '그린홈' 참여기업 모집·선정</td>
+            <td>주택·건물지원 보조금 사업은 <strong>등록 시공업체를 통해서만</strong> 신청 가능</td>
+          </tr>
+          <tr>
+            <th scope="row">탄소검증제</th>
+            <td>모듈 제조 탄소배출량 1~4등급 검증</td>
+            <td>고정가격 입찰 우대가격과 직결(1등급 16원/kWh)</td>
+          </tr>
+          <tr>
+            <th scope="row">소비자 피해 대응</th>
+            <td>시공가 정보 공단·한전 공개, 통합 콜센터 <span class="num">1855-3020</span>,
+                재생에너지 클라우드플랫폼 피해 신고</td>
+            <td>분양형 사기·부실시공 분쟁 급증에 따른 사후관리 강화</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>1-9. 세제 — '한국판 IRA'에 태양광 편입</h3>
+    <p>
+      2026년 8월 3일 발표된 세제개편안에서 태양광이 <strong>국내생산세액공제</strong> 대상에
+      포함됐습니다. 발전설비 전체가 아니라 <strong>셀·모듈 등 공급망 중요도가 높은 소재·부품</strong>이
+      대상이며, 설비 보유가 아닌 <strong>실제 생산 실적</strong>에 비례해 혜택이 커지도록 설계됐습니다.
+      국산 셀 내수 점유율이 3.9%까지 떨어진 상황에서 제조 기반 복원의 마중물이 될지가 관건입니다.
+    </p>
+
+    <h3>1-10. 상위 계획 — 제11차 전력수급기본계획</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 1-6. 11차 전기본 재생에너지 목표 (2025.2 확정)</caption>
+        <thead>
+          <tr><th scope="col">지표</th><th scope="col" class="n">2023</th><th scope="col" class="n">2030</th><th scope="col" class="n">2035</th><th scope="col" class="n">2038</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">재생에너지 설비용량</th><td class="n">30 GW</td><td class="n">78 GW</td><td class="n">—</td><td class="n">121.9 GW</td></tr>
+          <tr><th scope="row">태양광 설비용량</th><td class="n">—</td><td class="n">—</td><td class="n">70.8 GW</td><td class="n">77.2 GW</td></tr>
+          <tr><th scope="row">풍력 설비용량</th><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">40.7 GW</td></tr>
+          <tr><th scope="row">재생에너지 발전비중</th><td class="n">8.4 %</td><td class="n">18.8 %</td><td class="n">—</td><td class="n">29.2 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      2038년 태양광 77.2GW는 현재 수준에서 연평균 3.5~4GW를 <em>계속</em> 설치해야 도달하는 값입니다.
+      즉 정책 목표는 "성장"이 아니라 "현 속도의 장기 유지"에 가깝고, 그만큼 계통·입지·수익성
+      세 병목의 해소 여부가 목표 달성을 좌우합니다.
+    </p>
+  </section>
+
+  <!-- =========================== PART 2 =========================== -->
+  <section class="part" id="part2">
+    <div class="part-head">
+      <span class="part-num">02</span>
+      <div>
+        <h2>태양광 설비 설치업체 동향</h2>
+        <p>설치량은 정체지만 업계 구조는 다른 단계로 이동 중입니다. 제조는 미국 시장과
+           비중국 공급망으로, 개발·시공은 금융조달과 O&amp;M 통합 역량으로 경쟁축이 옮겨갔습니다.</p>
+      </div>
+    </div>
+
+    <h3>2-1. 시장 규모 — 국내 정체, 글로벌은 20년 만의 첫 역성장</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 2-1. 국내·글로벌 태양광 설치 규모</caption>
+        <thead>
+          <tr><th scope="col">구분</th><th scope="col" class="n">2024</th><th scope="col" class="n">2025</th><th scope="col" class="n">2026(E)</th><th scope="col">비고</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">국내 신규 설치</th><td class="n">3.15 GW</td><td class="n">3.5 GW</td><td class="n">4.0 GW</td><td>전년비 +6%(2024) 이후 완만한 증가</td></tr>
+          <tr><th scope="row">글로벌 신규 설치</th><td class="n">—</td><td class="n">—</td><td class="n">약 700 GW</td><td>BNEF: 20년 만의 첫 <strong>연간 감소</strong> 전망</td></tr>
+          <tr><th scope="row">중국 설치</th><td class="n">—</td><td class="n">372 GW</td><td class="n">341 GW</td><td>글로벌 감소를 주도</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li>중국 태양광 업계는 공급과잉 장기화로 <strong>40개사 이상이 파산·상장폐지</strong>됐습니다.</li>
+      <li>모듈 가격은 2년간의 원가 이하 판매 이후 <strong>안정화·소폭 회복</strong> 국면입니다.
+          은(Ag) 가격 상승과 중국 제조사 간 자율규제가 배경입니다.</li>
+      <li>국내 시장은 "표면적 정체, 내부 구조 재편"으로 요약됩니다. 설치 물량 증감보다
+          전력요금 변동성·탄소규제·분산에너지 정책이 사업성을 좌우하는 국면입니다.</li>
+    </ul>
+
+    <h3>2-2. 제조·수직계열 업체</h3>
+
+    <div class="tablewrap">
+      <table>
+        <caption>표 2-2. 주요 제조사 2026년 동향</caption>
+        <thead>
+          <tr><th scope="col">기업</th><th scope="col">2026 실적·행보</th><th scope="col">전략 포지션</th><th scope="col">상태</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">한화솔루션<br>(한화큐셀)</th>
+            <td>1Q 매출 <span class="num">3조 8,820억</span>(+25.4%), 영업익 <span class="num">926억</span>(+205.5%)<br>
+                2Q 매출 <span class="num">4조 5,827억</span>, 영업익 <span class="num">3,065억</span>(+200%), 순이익 <span class="num">2,929억</span> 흑자전환<br>
+                2Q 신재생 부문 매출 <span class="num">2조 4,823억</span>, 영업익 <span class="num">1,664억</span></td>
+            <td>미 조지아 카터스빌 <strong>2026년 말 3.3GW</strong> 잉곳-웨이퍼-셀 체계 완성.
+                '메이드 인 USA' 밸류체인으로 중국산 배제 정책의 최대 수혜</td>
+            <td><span class="chip ok">2개 분기 연속 흑자</span></td>
+          </tr>
+          <tr>
+            <th scope="row">OCI홀딩스</th>
+            <td>미국의 폴리실리콘 15% 관세 부과에 반색. 2년 뒤 물량까지 사실상 완판</td>
+            <td>말레이시아 폴리실리콘 → 베트남 웨이퍼로 이어지는 <strong>비중국 밸류체인</strong>.
+                한화큐셀에 폴리실리콘 공급</td>
+            <td><span class="chip ok">수혜</span></td>
+          </tr>
+          <tr>
+            <th scope="row">HD현대<br>에너지솔루션</th>
+            <td>데이터센터 지붕형 태양광 <span class="num">15~30MW</span> 규모 MOU 체결.
+                2026년 4월 수상태양광 출고 시작</td>
+            <td>일반 발전소 EPC보다 <strong>데이터센터·수상 등 특수 수요</strong>로 축을 이동</td>
+            <td><span class="chip pend">매출 본격화 단계</span></td>
+          </tr>
+          <tr>
+            <th scope="row">신성이엔지</th>
+            <td>재생에너지 부문 영업손실 <span class="num">34억원</span>, 적자폭 확대</td>
+            <td>국내 시장 위축 + 중국산 가격경쟁 압박 → <strong>반도체 수주·수익성 중심</strong>으로 전략 선회</td>
+            <td><span class="chip risk">재생E 부문 적자</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <span class="lbl">공급망 경고등</span>
+      <p>모듈 내수 점유율은 40%대(2024)를 유지하지만 <strong>셀 단계 국산 점유율은 3.9%</strong>까지
+         하락했습니다. 중국의 과잉 생산능력이 저가로 유입되면서 셀이 밸류체인의 구멍이 됐고,
+         이것이 '한국판 IRA'에서 셀·모듈을 국내생산세액공제 대상으로 콕 집은 배경입니다.
+         국내 EPC·시공사 입장에서는 <em>탄소검증 1등급 국산 모듈 확보 능력</em>이 곧 입찰 경쟁력입니다.</p>
+    </div>
+
+    <h3>2-3. 개발·EPC·발전자산 운영사</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 2-3. 개발·운영 플레이어 포지셔닝</caption>
+        <thead>
+          <tr><th scope="col">기업</th><th scope="col">사업 모델</th><th scope="col">2026 동향</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">SK이터닉스</th>
+            <td>재생에너지 개발·운영 + ESS 운영기술</td>
+            <td>개발사 네트워크 강화, <strong>발전자원 매입 규모 200MW로 확대</strong>,
+                금융구조화 모델 고도화. ESS 운영으로 고객사 수익 기여</td>
+          </tr>
+          <tr>
+            <th scope="row">브라이트에너지파트너스</th>
+            <td>태양광 개발·운영 + EV 충전 브랜드 '워터'</td>
+            <td>PPA 기반 장기 수익원 확보형 B2B/B2C 결합 모델</td>
+          </tr>
+          <tr>
+            <th scope="row">대명에너지</th>
+            <td>풍력·태양광 EPC 및 발전사업</td>
+            <td>재생에너지 정책 모멘텀 수혜주로 거론</td>
+          </tr>
+          <tr>
+            <th scope="row">발전 공기업<br>(중부·서부발전 등)</th>
+            <td>주민참여형·햇빛연금 모델, AI O&amp;M 도입</td>
+            <td>보령 '햇빛연금' 태양광 준공, AI 고장진단 시스템 도입,
+                발전데이터 개방 기반 벤처 실증(WP-AX)</td>
+          </tr>
+          <tr>
+            <th scope="row">중소 시공사</th>
+            <td>주택·건물 보급사업, 100kW~1MW급 지상형</td>
+            <td>공단 참여기업 등록 체계에 의존. SMP·REC 하락으로 마진 압박 심화</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>2-4. 사업 수익성 — 시공 수요를 결정하는 변수</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 2-4. 발전사업 수익 지표 변화</caption>
+        <thead>
+          <tr><th scope="col">지표</th><th scope="col">과거</th><th scope="col">2026 현재</th><th scope="col">방향</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">SMP</th><td class="n">150원대 (4년 전)</td><td class="n">80원대 저점 → 7월 140원대 반등</td><td><span class="chip flat">변동성 확대</span></td></tr>
+          <tr><th scope="row">REC 현물</th><td>—</td><td>전년비 <span class="num">4,000원 이상</span> 하락 후 반등 시도</td><td><span class="chip risk">구조적 하락</span></td></tr>
+          <tr><th scope="row">고정가격 상한(육지)</th><td>150원 이상</td><td class="n">147,686원/kWh (첫 140원대)</td><td><span class="chip risk">하락</span></td></tr>
+          <tr><th scope="row">100kW급 월 수익</th><td class="n">약 300만원</td><td class="n">약 200만원 내외</td><td><span class="chip risk">약 1/3 감소</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      수익성 하락은 신규 시공 발주 감소로 직결되며, 이는 국내 설치량이 4GW 부근에서
+      정체되는 근본 원인입니다. 반면 <strong>수익 변동성 자체를 관리하는 역량</strong>
+      (VPP 참여, ESS 병설, PPA 중개, 출력제어 회피 운영)이 새로운 부가가치 영역으로 부상했습니다.
+    </p>
+
+    <h3>2-5. 시장 정화 이슈 — 분쟁·사기·부실시공</h3>
+    <ul>
+      <li>분양형 태양광을 중심으로 시행사와 투자자·분양 희망자 간 분쟁이 속출하고 있습니다.</li>
+      <li>과거 정부 조사에서 약 <span class="num">8,000억원</span> 규모의 태양광 관련 비리가 적발된 이력이
+          있으며, 관련 기소 사건의 후속 처리가 2026년에도 이어지고 있습니다.</li>
+      <li>대응 인프라: 시공가 정보 공개(에공단·한전), 통합 콜센터 <span class="num">1855-3020</span>,
+          지자체 인력 확충, 재생에너지 사업관리 지원시스템 운영.</li>
+      <li><strong>계약 시 필수 확인</strong> — 설치비용, 공사기간, 선금·대금 지급시기,
+          하자보수 책임기간 및 하자담보 방법.</li>
+    </ul>
+
+    <h3>2-6. 경쟁축의 이동 — 무엇으로 이기는 시장이 되었나</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 2-5. 설치업체 경쟁 요소의 변화</caption>
+        <thead>
+          <tr><th scope="col">축</th><th scope="col">과거 (~2023)</th><th scope="col">현재 (2026)</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">제품 선택</th><td>최저가 모듈 조달</td><td>LCOE·장기 출력보존율·구조 안정성 / 탄소검증 등급</td></tr>
+          <tr><th scope="row">수주 경로</th><td>REC 현물시장 기대수익 기반 분양</td><td>장기계약(경매) 낙찰 가능성 · PPA 수요기업 직결</td></tr>
+          <tr><th scope="row">핵심 역량</th><td>시공 단가·속도</td><td>인허가 리스크 관리 + 금융구조화 + O&amp;M 통합</td></tr>
+          <tr><th scope="row">입지</th><td>지상형 임야·농지</td><td>지붕형·자가소비·수상·영농형 등 규제 우호 입지</td></tr>
+          <tr><th scope="row">계통</th><td>접속만 되면 성립</td><td>출력제어 가능성·ESS 병설·VPP 참여가 사업성 결정</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =========================== PART 3 =========================== -->
+  <section class="part" id="part3">
+    <div class="part-head">
+      <span class="part-num">03</span>
+      <div>
+        <h2>신기술 · 신제품 동향</h2>
+        <p>셀은 n형 전환을 마치고 탠덤으로, 시스템은 계통 대응(그리드포밍·ESS)으로,
+           운영은 AI·디지털트윈으로 이동했습니다. 응용 시장은 법제화된 영농형과 특수입지가 견인합니다.</p>
+      </div>
+    </div>
+
+    <h3>3-1. 셀·모듈 기술 — n형 전환 완료, 3파전 구도</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 3-1. 주력 셀 기술 비교 (2026)</caption>
+        <thead>
+          <tr>
+            <th scope="col">기술</th><th scope="col">모듈 효율</th><th scope="col">글로벌 비중</th>
+            <th scope="col">강점</th><th scope="col">적합 용도</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">TOPCon</th>
+            <td class="n">22~23% (평균 22.1%)</td>
+            <td class="n">생산량의 65% 이상</td>
+            <td>연 열화 약 0.4% 수준, 가격·성능 균형</td>
+            <td>사실상 표준 — 대부분의 지상·지붕형</td>
+          </tr>
+          <tr>
+            <th scope="row">HJT</th>
+            <td class="n">최대 24%</td>
+            <td>프리미엄 세그먼트</td>
+            <td>양산 기술 중 <strong>최고 온도계수</strong> — 고온 환경 손실 최소</td>
+            <td>고온 지붕, 여름철 피크 대응</td>
+          </tr>
+          <tr>
+            <th scope="row">BC (IBC/백콘택트)</th>
+            <td>최고 효율군</td>
+            <td>고급 소량</td>
+            <td>전면 무전극 → 수광면 100% 활용, <strong>최대 40년 보증</strong></td>
+            <td>면적 제약이 큰 부지, 장기 자산</td>
+          </tr>
+          <tr>
+            <th scope="row">PERC (p형)</th>
+            <td>—</td>
+            <td>퇴출 국면</td>
+            <td>—</td>
+            <td>신규 채택 비권장</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>3-2. 페로브스카이트/실리콘 탠덤 — 차세대 주도권 경쟁</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 3-2. 탠덤 셀 상용화 진행 상황</caption>
+        <thead>
+          <tr><th scope="col">항목</th><th scope="col">내용</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">최고 효율</th><td>한화큐셀 × 독일 헬름홀츠 연구소 공동개발 <strong>28.7%</strong> 탠덤 셀</td></tr>
+          <tr><th scope="row">설비 투자</th><td>충북 진천공장 <span class="num">1,365억원</span> 투입 파일럿 설비 구축(2025.5)</td></tr>
+          <tr><th scope="row">현재 단계</th><td>파일럿 라인 가동 중 — 상업화 가능한 <strong>정규 사이즈 셀·모듈 시험 생산</strong></td></tr>
+          <tr><th scope="row">양산 목표</th><td>한화솔루션은 2026년 상용화/하반기 양산 개시를 목표로 제시.
+              다만 최근 정부 R&amp;D 컨소시엄 기준 <strong>상용화 목표 시점은 2029년</strong>으로 제시돼 보도별 차이가 있음</td></tr>
+          <tr><th scope="row">정부 실증</th><td>2026년 4월부터 3년간 — 모듈 기준 <strong>효율 28% 이상, 상용면적 1.7m² 이상</strong> 실증
+              (한화큐셀 주관)</td></tr>
+          <tr><th scope="row">핵심 과제</th><td><span class="chip risk">안정성</span> 한화큐셀 유럽법인 R&amp;D 디렉터는
+              "상업 제조를 위해서는 <strong>안정성이 남아 있는 핵심 과제</strong>"라고 명시</td></tr>
+          <tr><th scope="row">경쟁 구도</th><td>한·중 양산 경쟁 격화. 우주용 등 고부가 응용까지 확장 중</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <span class="lbl">해석</span>
+      <p>"2026년 양산"과 "2029년 상용화"는 모순이 아니라 <strong>파일럿 양산 개시</strong>와
+         <strong>본격 상업 공급</strong>의 차이로 보는 것이 타당합니다. 실증 스펙(모듈 28%·1.7m²)이
+         2026~2029 3년 과제로 잡힌 점을 감안하면, 발주 계획에 탠덤을 전제로 넣는 것은 2028년
+         이후가 현실적입니다.</p>
+    </div>
+
+    <h3>3-3. 응용 시장 — 입지가 곧 신제품</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 3-3. 응용 세그먼트별 전망</caption>
+        <thead>
+          <tr><th scope="col">세그먼트</th><th scope="col">2026 상태</th><th scope="col">촉매</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">영농형 태양광</th>
+            <td><span class="chip pend">2026.12.17 법 시행</span></td>
+            <td>단독법 제정 + 이격거리 규제 정비. 농업 생산성과 발전량의 균형이 관건</td>
+          </tr>
+          <tr>
+            <th scope="row">수상 태양광</th>
+            <td><span class="chip ok">양산 출고 개시</span></td>
+            <td>HD현대에너지솔루션 2026.4 출고. 경북 등 주민참여형 수상태양광 확대</td>
+          </tr>
+          <tr>
+            <th scope="row">BIPV(건물일체형)</th>
+            <td><span class="chip pend">확대 논의</span></td>
+            <td>이격거리 규제 배제 대상(지붕형·자가소비형)과 결합 시 성장 여지</td>
+          </tr>
+          <tr>
+            <th scope="row">데이터센터 지붕형</th>
+            <td><span class="chip ok">계약 발생</span></td>
+            <td>15~30MW급 MOU. AI 전력수요 + RE100 요구가 동시 작용</td>
+          </tr>
+          <tr>
+            <th scope="row">철도·방음벽 등 특수입지</th>
+            <td><span class="chip flat">제한적·안정적</span></td>
+            <td>규모는 작으나 인허가 갈등이 적어 꾸준한 수요</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>3-4. 계통 대응 기술 — ESS와 그리드포밍</h3>
+    <ul>
+      <li><strong>그리드포밍(Grid-Forming) 인버터</strong> — ESS·태양광 등 인버터 기반 설비가
+          전압과 주파수를 <em>스스로 형성</em>하도록 제어하는 기술. 정부는
+          <strong>2027년 12월 상업운전 예정인 중앙계약시장 장주기 BESS부터 적용</strong>하기로 했습니다.
+          인버터가 '계통 추종'에서 '계통 형성'으로 역할이 바뀌는 전환점입니다.</li>
+      <li><strong>배전망 ESS</strong> — 9개 사업자 선정, 2030년까지 700MW. 호남·제주 태양광 접속
+          여력 확보의 직접 수단.</li>
+      <li><strong>태양광 연계 ESS 운영 개편</strong> — 충·방전 시간대가 10~16시 충전 / 17~24시 방전으로
+          이동. 낮 시간 잉여를 흡수하고 저녁 피크에 방전하는 방향으로 운영 논리가 정렬됐습니다.</li>
+      <li><strong>VPP(통합발전소)</strong> — 분산에너지법상 제도화. SMP 하락 국면에서 수익을 방어하는
+          수단으로 부각.</li>
+    </ul>
+
+    <h3>3-5. 인버터 시장</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 3-4. 인버터 세그먼트 성장 전망 (글로벌)</caption>
+        <thead>
+          <tr><th scope="col">세그먼트</th><th scope="col" class="n">2026</th><th scope="col" class="n">전망</th><th scope="col" class="n">CAGR</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">태양광 인버터 전체</th><td class="n">177억 달러</td><td class="n">499억 달러 (2033)</td><td class="n">15.9%</td></tr>
+          <tr><th scope="row">마이크로인버터</th><td class="n">5.6억 달러</td><td class="n">28.7억 달러 (2035)</td><td class="n">20.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      국내에서는 다쓰테크 등이 인버터를 축으로 <strong>EV 충전기·ESS·관제 서비스</strong>로 확장하고
+      있습니다. 인버터가 단품 하드웨어에서 <em>발전소 운영 플랫폼의 진입점</em>으로 재정의되는
+      흐름입니다.
+    </p>
+
+    <h3>3-6. AI · 디지털 O&amp;M</h3>
+    <div class="tablewrap">
+      <table>
+        <caption>표 3-5. AI/디지털 운영 기술 실증 성과</caption>
+        <thead>
+          <tr><th scope="col">기술 / 주체</th><th scope="col">내용</th><th scope="col">검증 성과</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">AI 고장진단<br>(한국중부발전)</th>
+            <td>전압·전류 데이터 + 기상정보 융합 분석, 잠재 고장 징후 조기 탐지</td>
+            <td>이상 감지 정확도 <span class="num">95% 이상</span><br>발전량 예측 정밀도 <span class="num">99%</span> 수준</td>
+          </tr>
+          <tr>
+            <th scope="row">발전량 예측 모델</th>
+            <td>미세먼지에 따른 발전 저감 요인 반영</td>
+            <td>정확도 <span class="num">95% 이상</span> 확보 목표</td>
+          </tr>
+          <tr>
+            <th scope="row">디지털 트윈 예측정비</th>
+            <td>실시간 데이터 학습 → 이상 징후 사전 감지 → 선제 정비</td>
+            <td>O&amp;M 비용 <strong>최대 30% 절감</strong></td>
+          </tr>
+          <tr>
+            <th scope="row">드론 자동진단 AI<br>(엔비로테크)</th>
+            <td>서부발전 WP-AX 챔피언십 선정, Physical AI O&amp;M 플랫폼 실증 착수</td>
+            <td>진단 정밀도 고도화 진행 중</td>
+          </tr>
+          <tr>
+            <th scope="row">디지털 O&amp;M 시스템<br>(제이케이코어)</th>
+            <td>AI 기반 태양광 발전소 디지털 O&amp;M</td>
+            <td>조달청 <strong>2026년도 제1차 혁신제품</strong> 지정</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      수익성이 압박받는 국면에서 <strong>발전량 1~2%와 O&amp;M 비용 30%</strong>는 사업성을 뒤집는 크기입니다.
+      AI O&amp;M이 '있으면 좋은 옵션'에서 '입찰 경쟁력 요소'로 이동하는 중입니다.
+    </p>
+
+    <h3>3-7. 자원순환 기술</h3>
+    <p>
+      폐모듈 EPR 시행과 맞물려 재활용 기술이 사업 영역으로 전환됐습니다. 현재 기술 수준에서
+      구성 소재의 <strong>최대 98% 재활용</strong>이 가능하다는 것이 업계 평가이며, 폐패널 물량이
+      2032년 9,632톤까지 늘어나는 만큼 리사이클링·리파워링(노후 모듈·PCS 교체) 서비스가
+      독립 수익 모델로 성장할 여지가 있습니다.
+    </p>
+  </section>
+
+  <!-- =========================== CALENDAR =========================== -->
+  <section class="part" id="calendar">
+    <div class="part-head">
+      <span class="part-num">04</span>
+      <div>
+        <h2>제도 시행 캘린더</h2>
+        <p>확정·예정된 일정만 시간순으로 정리했습니다. 사업 일정 수립 시 기준선으로 사용하십시오.</p>
+      </div>
+    </div>
+
+    <ul class="timeline">
+      <li class="done">
+        <span class="date">2026-01</span>
+        <span class="what">태양광 폐모듈 EPR 시행</span>
+        <span class="desc">생산자책임재활용제도 적용 개시 — 공제조합 운영 주체는 정리 중</span>
+      </li>
+      <li class="done">
+        <span class="date">2026-02-12</span>
+        <span class="what">재생에너지법 개정안 국회 통과</span>
+        <span class="desc">법 제명 변경, 신·재생 분리, 이격거리 원칙적 적용 배제</span>
+      </li>
+      <li class="done">
+        <span class="date">2026-02-28 ~ 06-14</span>
+        <span class="what">봄철 태양광 연계 ESS 운영기간</span>
+        <span class="desc">PCS 2MW 이상 대상, 충전 10~16시 / 방전 17~24시</span>
+      </li>
+      <li class="done">
+        <span class="date">2026-05-07</span>
+        <span class="what">영농형 태양광법 국회 통과</span>
+        <span class="desc">6월 16일 공포</span>
+      </li>
+      <li class="done">
+        <span class="date">2026-05-19</span>
+        <span class="what">RPS 폐지 법안 상임위 통과</span>
+        <span class="desc">기후에너지환경노동위 — 장기 경매제 전환 설계 착수</span>
+      </li>
+      <li class="done">
+        <span class="date">2026-06-29 ~ 07-08</span>
+        <span class="what">이격거리 시행령·시행규칙 입법예고</span>
+        <span class="desc">태양광 주거 200m·도로 100m 상한 / 풍력 1,000m 상한</span>
+      </li>
+      <li class="done">
+        <span class="date">2026-07</span>
+        <span class="what">계통관리변전소 지역 사업허가 요건 적용</span>
+        <span class="desc">접속 가능시기 전제 발전사업허가 중심 운영</span>
+      </li>
+      <li class="done">
+        <span class="date">2026-08-03</span>
+        <span class="what">세제개편안 발표 — 태양광 국내생산세액공제 편입</span>
+        <span class="desc">셀·모듈 등 핵심 소재·부품 대상, 생산 실적 연동</span>
+      </li>
+      <li>
+        <span class="date">2026-08-28</span>
+        <span class="what">개정 농지법 시행</span>
+        <span class="desc">위반 시 처분명령 의무화 — 영농형 사후관리 강화</span>
+      </li>
+      <li>
+        <span class="date">2026-12-17</span>
+        <span class="what">영농형 태양광법 시행</span>
+        <span class="desc">타용도 일시사용허가 체계 본격 가동</span>
+      </li>
+      <li>
+        <span class="date">2027-01 (목표)</span>
+        <span class="what">RPS 폐지 · 장기 경매제 시행</span>
+        <span class="desc">발전원별 LCOE 반영 별도 상한가 체계</span>
+      </li>
+      <li>
+        <span class="date">2027-12</span>
+        <span class="what">그리드포밍 의무 적용 개시</span>
+        <span class="desc">중앙계약시장 장주기 BESS 상업운전 설비부터</span>
+      </li>
+      <li>
+        <span class="date">2030</span>
+        <span class="what">REC 현물시장 완전 폐지 / 배전망 ESS 700MW</span>
+        <span class="desc">재생에너지 78GW, 발전비중 18.8% 목표 연차</span>
+      </li>
+      <li>
+        <span class="date">2038</span>
+        <span class="what">11차 전기본 최종 목표</span>
+        <span class="desc">태양광 77.2GW · 재생에너지 121.9GW · 발전비중 29.2%</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- =========================== IMPLICATIONS =========================== -->
+  <section class="part" id="implications">
+    <div class="part-head">
+      <span class="part-num">05</span>
+      <div>
+        <h2>리스크 · 시사점</h2>
+        <p>세 리포트를 교차해 도출한 판단입니다.</p>
+      </div>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <caption>표 5-1. 주요 리스크와 대응</caption>
+        <thead>
+          <tr><th scope="col">리스크</th><th scope="col">내용</th><th scope="col">대응 방향</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">제도 전환 공백</th>
+            <td>RPS → 경매제 전환기(2026~2027)에 계약 구조·가중치 처리 불확실</td>
+            <td>2026년 고정가격 입찰을 '막차'로 볼지 판단 필요. 에공단 Q&amp;A 지속 모니터링</td>
+          </tr>
+          <tr>
+            <th scope="row">계통 제약</th>
+            <td>호남·제주 출력제어 상시화, 계통관리변전소 지역 허가 제약</td>
+            <td>입지 선정 시 접속 가능시기 우선 검토. ESS 병설·VPP 참여 설계</td>
+          </tr>
+          <tr>
+            <th scope="row">수익성 하락</th>
+            <td>SMP 변동성 확대, REC 하락, 고정가격 상한 140원대 진입</td>
+            <td>단순 발전 판매 → PPA·자가소비·수요기업 직결 모델로 전환</td>
+          </tr>
+          <tr>
+            <th scope="row">공급망 편중</th>
+            <td>국산 셀 점유율 3.9%, 중국산 저가 유입</td>
+            <td>탄소검증 등급 확보 제품 조달로 입찰 우대(16원/kWh) 확보</td>
+          </tr>
+          <tr>
+            <th scope="row">지역 수용성</th>
+            <td>이격거리 완화에 대한 농촌 주민 반발</td>
+            <td>주민참여형·햇빛소득 구조 설계 — 규제 배제 혜택과 수용성 동시 확보</td>
+          </tr>
+          <tr>
+            <th scope="row">사후 규제</th>
+            <td>EPR 분담, 개정 농지법 처분명령 의무화, 부실시공 관리 강화</td>
+            <td>계약서에 하자보수 기간·담보 방법 명시, 폐기 비용 사업비 선반영</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>종합 판단</h3>
+    <ul>
+      <li><strong>규제는 완화가 아니라 '표준화'됐습니다.</strong> 이격거리·영농형·EPR 모두
+          "진입 문턱은 낮추되 이행 의무는 조인다"는 동일한 설계 논리를 갖습니다.
+          예측 가능성이 오른 만큼 사후 관리 부담도 함께 올랐습니다.</li>
+      <li><strong>사업 모델의 우열이 규제로 결정됩니다.</strong> 지붕형·자가소비형·주민참여형은
+          이격거리 규제에서 전면 배제됩니다. 지상형 단독 개발 대비 구조적 우위가 제도로 보장된 셈입니다.</li>
+      <li><strong>설치량은 정체, 밸류풀은 이동합니다.</strong> 4GW 시장에서 이익은 시공 단가가 아니라
+          금융구조화(SK이터닉스 200MW 매입), 특수입지(데이터센터·수상), O&amp;M(비용 30% 절감),
+          자원순환(EPR)으로 옮겨가고 있습니다.</li>
+      <li><strong>제조는 국내가 아니라 미국에서 승부가 납니다.</strong> 한화큐셀의 조지아 3.3GW,
+          OCI의 비중국 밸류체인이 실적을 견인한 반면, 내수 의존형(신성이엔지 재생E 부문)은 적자입니다.
+          '한국판 IRA'가 이 격차를 좁힐 수 있을지가 2027년 관전 포인트입니다.</li>
+      <li><strong>기술 로드맵은 2027~2029에 변곡점이 있습니다.</strong> 그리드포밍 의무화(2027.12),
+          탠덤 실증 종료(2029)가 겹칩니다. 지금 발주하는 설비는 TOPCon 기반으로 확정하되,
+          부지·구조물은 향후 리파워링을 전제로 설계하는 것이 합리적입니다.</li>
+    </ul>
+  </section>
+
+  <!-- =========================== SOURCES =========================== -->
+  <section class="sources" id="sources">
+    <h2 style="font-size:19px; margin:0 0 4px;">출처</h2>
+    <p style="font-size:12.5px; color:var(--muted); margin-bottom:14px;">
+      2026년 8월 9일 기준 공개 웹 자료 조사. 법령 조문은 시행일·공포 내용 기준이며,
+      입법예고 단계 항목은 확정 시 변경될 수 있습니다.
+    </p>
+    <ol>
+      <li>신·재생에너지법 개정안 국회 통과 — <a href="https://www.lexology.com/library/detail.aspx?g=b62cf3e4-076c-4f46-b4e7-0a9fd766c97c">Lexology</a> / <a href="https://www.shinkim.com/kor/media/newsletter/3141">법무법인 세종</a></li>
+      <li>에너지 법령 개정안 통과 분석 — <a href="https://www.lawtimes.co.kr/news/articleView.html?idxno=217111">법률신문(율촌)</a></li>
+      <li>재생에너지법 체계 전면 개편 — <a href="http://www.energydaily.co.kr/news/articleView.html?idxno=167745">에너지데일리</a></li>
+      <li>이격거리 시행령 입법예고 — <a href="https://opinion.lawmaking.go.kr/gcom/ogLmPp/86912/myOpn?opnOpYn=Y&amp;isOgYn=Y">국민참여입법센터</a></li>
+      <li>“태양광 웃고, 풍력 울고” 이격거리 시행령 — <a href="https://m.ekn.kr/view.php?key=20260729023327255">에너지경제</a></li>
+      <li>이격거리 재입법, 사업자·농촌 반응 — <a href="https://www.nongmin.com/article/20260729500664">농민신문</a></li>
+      <li>기후에너지환경부 설명자료(이격거리 합리화) — <a href="https://www.mcee.go.kr/home/web/board/read.do?boardId=1845560">기후에너지환경부</a></li>
+      <li>재기본 이격거리 기준 재등장 논란 — <a href="https://www.electimes.com/news/articleView.html?idxno=368382">전기신문</a></li>
+      <li>태양광 이격거리 규제 현황과 쟁점 — <a href="https://nsp.nanet.go.kr/plan/subject/detail.do?nationalPlanControlNo=PLAN0000049722">국가전략정보포털</a></li>
+      <li>RPS 폐지·장기 경매제 전면 개편 — <a href="https://m.ekn.kr/view.php?key=20260522020316869">에너지경제</a></li>
+      <li>RPS 폐지 관련 에공단 Q&amp;A 정리 — <a href="https://blog.haezoom.com/insight_rps_27/">해줌</a></li>
+      <li>연도별 RPS 의무공급비율 — <a href="https://www.electimes.com/news/articleView.html?idxno=314234">전기신문</a></li>
+      <li>RPS 제도 개요 — <a href="https://www.knrec.or.kr/biz/introduce/new_rps/intro_rps.do?gubun=A">한국에너지공단 신·재생에너지센터</a></li>
+      <li>2026 상반기 고정가격계약 경쟁입찰 설명자료 — <a href="https://www.knrec.or.kr/biz/pds/notice/view.do?no=6583">신·재생에너지센터</a></li>
+      <li>태양광 고정가격 첫 140원대 — <a href="http://www.e2news.com/news/articleView.html?idxno=332473">이투뉴스</a></li>
+      <li>2026년 7월 SMP·REC 동향 — <a href="https://blog.haezoom.com/smprec_202607month/">해줌</a></li>
+      <li>태양광 발전 수익성 진단 — <a href="https://www.skenews.kr/news/articleView.html?idxno=51516">산경e뉴스</a></li>
+      <li>영농형 태양광법 제정 — <a href="https://www.shinkim.com/kor/media/newsletter/3283">법무법인 세종</a> / <a href="https://www.industrynews.co.kr/news/articleView.html?idxno=80809">인더스트리뉴스</a></li>
+      <li>영농형 태양광법 쟁점 분석 — <a href="https://www.foodandclimate.or.kr/2026/05/08/agrivoltaics-law-2026/">KIFC</a></li>
+      <li>농지법 개정·영농형 제도권 편입 — <a href="https://www.nongmin.com/article/20260508500252">농민신문</a></li>
+      <li>계통관리변전소 지정·시행 영향 — <a href="https://shinkim.com/kor/media/newsletter/2548">법무법인 세종</a></li>
+      <li>출력제어 확대 현황 — <a href="https://www.hkbs.co.kr/news/articleView.html?idxno=713412">환경일보</a> / <a href="https://www.mdilbo.com/detail/NDULL4/731322">무등일보</a></li>
+      <li>배전망 ESS 사업자 9곳 확정 — <a href="https://edata.ekn.kr/article/view/ekn202607100003">에너지경제</a></li>
+      <li>2026년 봄철 태양광 ESS 운영방안 — <a href="https://www.kpx.or.kr/board.es?mid=a11201000000&amp;bid=0042&amp;list_no=76834&amp;act=view">전력거래소</a></li>
+      <li>그리드포밍 도입(2027년 장주기 ESS부터) — <a href="https://www.mt.co.kr/economy/2026/06/24/2026062411202665220">머니투데이</a> / <a href="https://www.solartodaymag.com/news/articleView.html?idxno=20790">솔라투데이</a></li>
+      <li>분산에너지 활성화 특별법 — <a href="https://www.law.go.kr/lsInfoP.do?lsiSeq=251685">국가법령정보센터</a></li>
+      <li>태양광 폐패널 EPR 시행 — <a href="http://www.epj.co.kr/news/articleView.html?idxno=31510">일렉트릭파워</a> / <a href="https://www.bizhankook.com/bk/article/25172">비즈한국</a></li>
+      <li>신재생에너지설비 KS인증 — <a href="https://www.knrec.or.kr/biz/introduce/new_cert/intro_energyks.do?gubun=A">신·재생에너지센터</a></li>
+      <li>신·재생에너지 설비의 지원 등에 관한 규정 — <a href="https://www.law.go.kr/LSW//admRulInfoP.do?admRulSeq=2100000282496&amp;chrClsCd=010201">국가법령정보센터</a></li>
+      <li>2026년 신재생에너지 보급사업 참여기업 모집 — <a href="https://www.knrec.or.kr/biz/pds/notice/view.do?no=6143">신·재생에너지센터</a></li>
+      <li>태양광 소비자(투자자) 피해 안내 — <a href="https://recloud.energy.or.kr/m/damage/damage01_01.do">재생에너지 클라우드플랫폼</a></li>
+      <li>태양광 분양 사기·분쟁 급증 — <a href="https://v.daum.net/v/20260515154301032">보도</a></li>
+      <li>2026 세제개편안 '한국판 IRA' — <a href="https://www.newsis.com/view/NISX20260729_0003728267">뉴시스</a> / <a href="https://www.sedaily.com/article/20075261">서울경제</a></li>
+      <li>국산 태양광 셀 점유율 3.9% — <a href="https://www.sidae.com/article/2026080514574077046">시대</a></li>
+      <li>제11차 전력수급기본계획 확정 — <a href="https://www.lexology.com/library/detail.aspx?g=8cd26aba-c63c-40bd-a3e5-b5299434fcd3">Lexology</a> / <a href="https://www.khan.co.kr/article/202502211941001">경향신문</a> / <a href="https://www.epj.co.kr/news/articleView.html?idxno=35900">일렉트릭파워</a></li>
+      <li>2026년 대한민국 태양광 산업 전망 — <a href="https://www.solartodaymag.com/news/articleView.html?idxno=20365">솔라투데이</a> / <a href="https://www.industrynews.co.kr/news/articleView.html?idxno=76428">인더스트리뉴스</a></li>
+      <li>2025년 하반기 태양광 산업 동향 — <a href="https://eiec.kdi.re.kr/policy/domesticView.do?ac=0000201337">KDI 경제정보센터</a></li>
+      <li>BNEF 2026 글로벌 태양광 감소 전망 — <a href="https://www.pv-magazine.com/2026/06/11/solar-slowing-bnef-asks-whats-next-for-the-industry/">pv magazine</a> / <a href="https://www.engineeringnews.co.za/article/global-solar-additions-to-fall-for-first-time-in-2026-says-bnef-2025-12-17">Engineering News</a></li>
+      <li>중국 태양광 40개사 퇴출 — <a href="https://www.g-enews.com/article/Global-Biz/2026/06/2026060210252990972bd56fbc3c_1">글로벌이코노믹</a></li>
+      <li>한화솔루션 2026년 1분기 실적 — <a href="https://www.solartodaymag.com/news/articleView.html?idxno=20662">솔라투데이</a></li>
+      <li>한화솔루션 2분기 실적 — <a href="https://www.huffingtonpost.kr/article/259116">허프포스트코리아</a></li>
+      <li>한화큐셀 조지아 공장 가동 재개 — <a href="https://www.g-enews.com/article/Global-Biz/2026/03/2026030810062794230c8c1c064d_1">글로벌이코노믹</a> / <a href="http://www.impacton.net/news/articleView.html?idxno=19169">임팩트온</a></li>
+      <li>미 폴리실리콘 관세와 한화·OCI — <a href="https://www.etoday.co.kr/news/view/2612134">이투데이</a> / <a href="https://news.bizwatch.co.kr/article/industry/2026/05/29/0032">비즈워치</a></li>
+      <li>신성이엔지 실적·전략 — <a href="https://www.finance-scope.com/article/view/scp202603030017">파이낸스스코프</a></li>
+      <li>태양광 관련주 동향(신성이엔지·HD현대에너지솔루션 등) — <a href="http://www.finomy.com/news/articleView.html?idxno=251575">현대경제신문</a></li>
+      <li>SK이터닉스 2026 전략 — <a href="https://esg.sketernix.com/">SK이터닉스 지속가능경영보고서</a></li>
+      <li>페로브스카이트 탠덤 상용화 — <a href="https://www.hanwha.co.kr/newsroom/media_center/news/news_view.do?seq=7931">한화그룹 뉴스룸</a> / <a href="https://www.paxetv.com/news/articleView.html?idxno=240714">팍스경제TV</a></li>
+      <li>탠덤 셀 안정성 과제 — <a href="https://theguru.co.kr/mobile/article.html?no=63624">더구루</a></li>
+      <li>탠덤 모듈 실증 정부과제 — <a href="https://news.nate.com/view/20260629n05006">네이트뉴스</a> / <a href="https://kidd.co.kr/news/239648">산업일보</a></li>
+      <li>TOPCon·HJT·BC 기술 비교 2026 — <a href="https://www.sunevosolar.com/blog/topcon-vs-hjt-vs-bc-2026-photovoltaic-module-selection-guide_b30">Sunevo Solar</a></li>
+      <li>중부발전 AI 태양광 고장진단 — <a href="https://www.energy-news.co.kr/news/articleView.html?idxno=218150">에너지신문</a></li>
+      <li>엔비로테크 Physical AI O&amp;M 실증 — <a href="https://www.enetnews.co.kr/news/articleView.html?idxno=53099">이넷뉴스</a></li>
+      <li>제이케이코어 디지털 O&amp;M 혁신제품 지정 — <a href="https://www.solartodaymag.com/news/articleView.html?idxno=20404">솔라투데이</a></li>
+      <li>보령 햇빛연금 주민참여형 태양광 — <a href="https://www.e-science.co.kr/news/articleView.html?idxno=133087">이코노미사이언스</a></li>
+      <li>태양광 인버터·마이크로인버터 시장 전망 — <a href="https://www.researchnester.com/reports/solar-hybrid-inverter-market/7125">Research Nester</a></li>
+      <li>2026 국제그린에너지엑스포(영농형·BIPV·수상) — <a href="https://www.m-economynews.com/news/article.html?no=66652">M이코노미뉴스</a></li>
+    </ol>
+
+    <footer class="note">
+      본 브리프는 공개된 언론·정부·법령 자료를 종합해 작성한 참고 문서입니다. 인허가·계약·투자
+      의사결정 시에는 원문 법령과 소관 부처(기후에너지환경부, 한국에너지공단 신·재생에너지센터)의
+      최신 공고를 반드시 직접 확인하시기 바랍니다. 입법예고·상임위 통과 단계 항목은 확정 전이며,
+      탠덤 셀 상용화 시점 등 보도별로 수치가 상이한 항목은 본문에 그 차이를 명시했습니다.
+    </footer>
+  </section>
+
+</div>
