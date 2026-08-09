@@ -6,8 +6,8 @@
 | # | 할 일 | 하는 곳 | 누가 |
 |---|---|---|---|
 | 1 | 봇 앱 키 발급 | 카카오워크 관리자 | 워크스페이스 관리자 |
-| 2 | 환경변수 등록 | claude.ai/code 환경 설정 | 계정 소유자 |
-| 3 | `api.kakaowork.com` 도메인 허용 | claude.ai/code 환경 설정 | 계정 소유자 |
+| 2 | `api.kakaowork.com` 도메인 허용 | claude.ai/code 환경 선택기 → 환경 설정 대화상자 | 계정 소유자 |
+| 3 | 환경변수(`KAKAOWORK_*`) 등록 | 위와 같은 대화상자 | 계정 소유자 |
 
 ---
 
@@ -30,47 +30,81 @@
 
 ---
 
-## 2. 환경변수 등록
+## 2~3. 환경 설정 (환경변수 + 도메인 허용)
 
-루틴은 매 실행마다 **새 컨테이너**에서 돌기 때문에, 키를 로컬 셸에 export 해두는 것으로는
-안 됩니다. 반드시 환경(Environment) 설정에 저장해야 합니다.
+두 가지 모두 **같은 대화상자 하나**에서 처리합니다. 루틴은 매 실행마다 새 컨테이너에서
+돌기 때문에, 로컬 셸에 `export` 해두는 것으로는 반영되지 않습니다.
 
-1. <https://claude.ai/code> → **Environments** → 이 루틴이 쓰는 환경
-   (`env_01VnTCq9DzzUucM349KXKGby`) 선택
-2. **Environment variables** 에 추가:
+### 환경 설정 대화상자 여는 법
 
-   | 이름 | 값 |
-   |---|---|
-   | `KAKAOWORK_APP_KEY` | 1번에서 복사한 App Key |
-   | `KAKAOWORK_EMAIL` | 수신할 카카오워크 계정 이메일 |
-   | `KAKAOWORK_CONVERSATION_ID` | (그룹방에 보낼 때만) 대화방 ID |
+**"Environments" 라는 설정 페이지나 전용 URL은 없습니다.** 환경 선택기로만 접근합니다.
 
-App Key는 비밀값입니다. 리포지토리 파일이나 커밋 메시지, 루틴 프롬프트에 절대 적지 마세요.
+1. <https://claude.ai/code> 접속
+2. 메시지 입력창 **바로 윗줄**의 **구름 아이콘 버튼**(현재 환경 이름이 적혀 있음, 보통
+   `Default`)을 클릭
+3. 열린 메뉴의 **Cloud** 섹션에서 대상 환경(`env_01VnTCq9DzzUucM349KXKGby` = 이름 `Default`)
+   위에 마우스를 올리면 오른쪽에 **설정(톱니) 아이콘**이 나타난다 → 클릭
+4. 대화상자에 **Name / Network access / Environment variables / Setup script** 네 항목이 있다
 
----
+### ① Network access — 도메인 허용
 
-## 3. 도메인 허용 (필수)
-
-현재 이 환경의 이그레스 정책은 `api.kakaowork.com` 을 **403으로 차단**합니다.
-확인된 프록시 로그:
+현재 이 환경은 **Trusted**(허용 목록 도메인만)이며 `api.kakaowork.com` 은 목록에 없어
+**403으로 차단**됩니다. 확인된 프록시 로그:
 
 ```
 connect_rejected  gateway answered 403 to CONNECT  host: api.kakaowork.com:443
 ```
 
-같은 환경 설정 화면의 **Network access** 에서 `api.kakaowork.com` 을 허용 목록에 추가하거나,
-네트워크 정책을 더 넓은 설정으로 바꿔야 합니다. 이 단계를 건너뛰면 스크립트는 다음
-메시지를 남기고 실패합니다.
+1. **Network access** 를 **Custom** 으로 변경
+2. **Allowed domains** 칸에 한 줄에 하나씩 입력:
+   ```text
+   api.kakaowork.com
+   ```
+3. **Also include default list of common package managers** 를 **반드시 체크**한다.
+   체크하지 않으면 여기 적은 도메인만 허용되어 pip·npm 등 기존에 되던 접속이 끊긴다.
 
-```
-카카오워크 API(api.kakaowork.com) 접속이 이그레스 정책에서 차단되었습니다.
+접근 수준은 None / Trusted / Full / Custom 네 가지다. `*.` 를 앞에 붙이면 하위 도메인
+전체를 허용한다(`*.kakaowork.com`). GitHub 트래픽은 별도 프록시라 이 목록과 무관하다.
+
+### ② Environment variables — 키 등록
+
+같은 대화상자의 **Environment variables** 칸에 `.env` 형식으로 한 줄에 하나씩 적는다.
+
+```text
+KAKAOWORK_APP_KEY=발급받은_앱_키
+KAKAOWORK_EMAIL=본인_카카오워크_계정_이메일
 ```
 
-관련 문서: <https://code.claude.com/docs/en/claude-code-on-the-web>
+그룹 대화방으로 받으려면 `KAKAOWORK_EMAIL` 대신 `KAKAOWORK_CONVERSATION_ID` 를 넣고,
+해당 방에 봇을 초대한다. 값에 `#` 이 들어가면 따옴표로 감싼다(감싸지 않으면 `#` 뒤가
+주석으로 잘린다).
+
+입력 후 저장한다.
+
+> **보안 주의.** 클라우드 환경에는 전용 시크릿 저장소가 없습니다. 환경변수 값은 그 환경을
+> 쓰는 사람이면 누구나 평문으로 읽을 수 있고, 공식 문서도 *"don't add API keys or other
+> credentials"* 라고 경고합니다. 개인 계정의 개인 환경이라면 읽을 수 있는 사람은 본인뿐이지만,
+> 그래도 (a) App Key는 카카오워크 메시지 발송 권한만 가진 최소 권한 키여야 하고,
+> (b) 노출이 의심되면 즉시 재발급하십시오. 리포지토리 파일·커밋 메시지·루틴 프롬프트에는
+> 절대 적지 마십시오.
+
+### 반영 시점
+
+세션은 **시작할 때 한 번** 환경 설정을 복사합니다. 따라서 저장 후:
+
+- 이미 돌고 있는 세션에는 반영되지 않는다 (기존 값을 그대로 유지)
+- 이후 새로 시작하는 세션부터 적용된다. 루틴은 매 실행마다 새 세션을 만들므로 다음
+  08:00(KST) 실행부터 자동 반영된다
+- 즉시 확인하려면 **새 세션을 열어서** 4번 확인 절차를 실행한다
+
+관련 문서: <https://code.claude.com/docs/en/cloud-environments>
 
 ---
 
 ## 4. 확인
+
+환경 설정 변경은 **새로 시작하는 세션**부터 적용됩니다. 설정을 저장한 세션에서 그대로
+실행하면 여전히 실패하므로, 새 세션을 열고 확인하십시오.
 
 세 단계를 마친 뒤 세션에서 다음을 실행합니다.
 
@@ -111,8 +145,8 @@ python3 scripts/kakaowork_send.py --status unchanged \
 
 | 증상 | 원인 / 조치 |
 |---|---|
-| `이그레스 정책에서 차단` | 3번 도메인 허용 누락 |
-| `KAKAOWORK_APP_KEY 가 설정되어 있지 않습니다` | 2번 환경변수 누락 (로컬 export는 루틴에 반영되지 않음) |
+| `이그레스 정책에서 차단` | 도메인 허용 누락, 또는 설정 전에 시작된 세션에서 실행함 |
+| `KAKAOWORK_APP_KEY 가 설정되어 있지 않습니다` | 환경변수 누락, 또는 설정 전에 시작된 세션에서 실행함 (로컬 export는 루틴에 반영되지 않음) |
 | HTTP 401 / `invalid_token` | App Key 오타, 또는 앱 삭제·재발급됨 |
 | HTTP 400 `invalid_parameter` (email) | 카카오워크에 없는 이메일. 워크스페이스 계정 이메일이어야 함 |
 | 호출은 성공(`success: true`)인데 메시지가 안 옴 | 봇이 비활성 상태거나, 그룹방에 봇이 초대되지 않음 |
