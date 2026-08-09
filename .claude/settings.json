@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Artifact",
+      "WebSearch",
+      "WebFetch",
+      "Read",
+      "Write",
+      "Edit",
+      "Bash(git *)"
+    ]
+  }
+}
