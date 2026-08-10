@@ -39,8 +39,11 @@ TIMEOUT = 20
 UPLOAD_TIMEOUT = 300
 RETRY_DELAYS = (2, 4, 8, 16)
 
-# 카카오워크 텍스트 블록 1개의 상한. 넘으면 잘라서 보낸다.
-TEXT_BLOCK_LIMIT = 500
+# 카카오워크 블록 필드 길이 상한. API로 직접 확인한 값이며, 넘기면
+# invalid_parameter("요청한 블록 정보가 올바르지 않습니다")로 거부된다.
+TEXT_BLOCK_LIMIT = 500   # text 블록 본문
+HEADER_LIMIT = 20        # header 블록 text
+TERM_LIMIT = 10          # description 블록 term
 # conversations.upload 의 file 형식 상한 (약 1GB).
 UPLOAD_SIZE_LIMIT = 1_050_000_000
 
@@ -113,6 +116,36 @@ def ok(code, res, what):
     raise SystemExit("%s 실패 [HTTP %s] %s" % (what, code, json.dumps(err, ensure_ascii=False)))
 
 
+def clip(text, limit):
+    """상한을 넘는 문자열을 잘라 준다. 잘린 사실이 보이도록 말줄임표를 붙인다."""
+    text = (text or "").strip()
+    if len(text) <= limit:
+        return text
+    return text[: limit - 1] + "\u2026"
+
+
+def validate_blocks(blocks):
+    """발송 전에 길이 위반을 잡아 어떤 블록이 문제인지 알려 준다.
+
+    API는 어느 블록이 틀렸는지 알려주지 않고 뭉뚱그린 메시지만 준다.
+    """
+    limits = {"header": ("text", HEADER_LIMIT), "text": ("text", TEXT_BLOCK_LIMIT)}
+    for i, b in enumerate(blocks):
+        kind = b.get("type")
+        if kind in limits:
+            field, limit = limits[kind]
+            if len(b.get(field) or "") > limit:
+                raise SystemExit(
+                    "블록 %d(%s)의 %s가 %d자 상한을 넘습니다 (%d자)."
+                    % (i, kind, field, limit, len(b[field]))
+                )
+        if kind == "description" and len(b.get("term") or "") > TERM_LIMIT:
+            raise SystemExit(
+                "블록 %d(description)의 term이 %d자 상한을 넘습니다 (%d자)."
+                % (i, TERM_LIMIT, len(b["term"]))
+            )
+
+
 def chunk(text, limit=TEXT_BLOCK_LIMIT):
     """긴 본문을 블록 상한에 맞춰 줄 단위로 나눈다."""
     blocks, buf = [], ""
@@ -136,10 +169,11 @@ def chunk(text, limit=TEXT_BLOCK_LIMIT):
 
 def build_blocks(status, title, body, date):
     changed = status == "changed"
+    # header는 20자가 상한이다. 넘치면 발송 자체가 거부되므로 여기서 잘라 낸다.
     blocks = [
         {
             "type": "header",
-            "text": title or ("태양광 브리프 갱신" if changed else "태양광 브리프 · 변동 없음"),
+            "text": clip(title or ("브리프 갱신" if changed else "브리프 · 변동 없음"), HEADER_LIMIT),
             "style": "blue" if changed else "yellow",
         }
     ]
@@ -278,6 +312,13 @@ def main():
         raise SystemExit("본문이 비어 있습니다. --text / --text-file / stdin 중 하나로 넘기세요.")
 
     blocks = build_blocks(args.status, args.title, body_text, args.date)
+    validate_blocks(blocks)
+    if args.title and len(args.title.strip()) > HEADER_LIMIT:
+        print(
+            "경고: --title 이 %d자로 header 상한(%d자)을 넘어 잘렸습니다 -> %s"
+            % (len(args.title.strip()), HEADER_LIMIT, blocks[0]["text"]),
+            file=sys.stderr,
+        )
     # 알림 목록과 푸시에 뜨는 대체 문구.
     fallback = (args.title or blocks[0]["text"]) + " — " + body_text.splitlines()[0]
 

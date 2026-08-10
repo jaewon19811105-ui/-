@@ -131,7 +131,7 @@ python3 scripts/kakaowork_send.py --status unchanged \
 | 옵션 | 설명 |
 |---|---|
 | `--status changed\|unchanged` | 필수. 헤더 색과 기본 제목이 달라집니다 (파랑 / 노랑) |
-| `--title` | 헤더 문구 직접 지정 |
+| `--title` | 헤더 문구 직접 지정. **20자 상한** — 넘으면 자동으로 잘리고 경고를 남깁니다 |
 | `--text` / `--text-file` / stdin | 본문. 셋 중 하나. 500자 넘으면 줄 단위로 자동 분할 |
 | `--pdf` | 첨부할 PDF 경로. 본문 메시지 다음에 **파일로** 전송된다 |
 | `--date` | 기준일 표시 |
@@ -142,12 +142,28 @@ python3 scripts/kakaowork_send.py --status unchanged \
 
 ---
 
+## 블록 필드 길이 상한
+
+API로 직접 확인한 값입니다. 넘기면 어느 블록이 문제인지 알려주지 않고
+`invalid_parameter` "요청한 블록 정보가 올바르지 않습니다"만 돌아옵니다.
+
+| 블록 · 필드 | 상한 | 스크립트 처리 |
+|---|---|---|
+| `header.text` | **20자** | `clip()` 으로 자동 절단 + stderr 경고 |
+| `text.text` | 500자 | `chunk()` 로 줄 단위 분할 |
+| `description.term` | 10자 | 고정값 `기준일`(3자) 사용 |
+| `description.content.text` | 500자 이상 허용 | 기준일 문자열만 넣음 |
+
+발송 전 `validate_blocks()` 가 길이를 검사해, API의 뭉뚱그린 메시지 대신
+몇 번째 블록의 어떤 필드가 몇 자 초과했는지 알려줍니다.
+
 ## 자주 나는 오류
 
 | 증상 | 원인 / 조치 |
 |---|---|
 | `이그레스 정책에서 차단` | 도메인 허용 누락, 또는 설정 전에 시작된 세션에서 실행함 |
 | `KAKAOWORK_APP_KEY 가 설정되어 있지 않습니다` | 환경변수 누락, 또는 설정 전에 시작된 세션에서 실행함 (로컬 export는 루틴에 반영되지 않음) |
+| `invalid_parameter` / 블록 정보가 올바르지 않습니다 | 대개 `--title` 이 20자를 넘은 경우. 위 길이 상한표 참고 |
 | HTTP 401 / `invalid_token` | App Key 오타, 또는 앱 삭제·재발급됨 |
 | HTTP 400 `invalid_parameter` (email) | 카카오워크에 없는 이메일. 워크스페이스 계정 이메일이어야 함 |
 | 호출은 성공(`success: true`)인데 메시지가 안 옴 | ① **다른 사람 계정으로 갔을 가능성** — `KAKAOWORK_EMAIL` 이 본인 이메일인지 확인. `rooms` 명령으로 대화방 상대를 확인한다. ② 카카오톡(KakaoTalk)이 아니라 **카카오워크(Kakao Work)** 앱을 봐야 한다. ③ 봇이 비활성이거나 그룹방에 초대되지 않음 |
