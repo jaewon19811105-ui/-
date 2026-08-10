@@ -117,7 +117,7 @@ python3 scripts/kakaowork_send.py --status unchanged --text "설정 점검" --dr
 python3 scripts/kakaowork_send.py --status unchanged \
   --title "태양광 브리프 · 연동 테스트" \
   --text "카카오워크 발송 설정이 정상 동작합니다." \
-  --pdf-url "https://github.com/jaewon19811105-ui/-/blob/HEAD/reports/solar-brief-2026.pdf"
+  --pdf reports/solar-brief-2026.pdf
 ```
 
 카카오워크에 메시지가 도착하면 완료입니다.
@@ -133,7 +133,7 @@ python3 scripts/kakaowork_send.py --status unchanged \
 | `--status changed\|unchanged` | 필수. 헤더 색과 기본 제목이 달라집니다 (파랑 / 노랑) |
 | `--title` | 헤더 문구 직접 지정 |
 | `--text` / `--text-file` / stdin | 본문. 셋 중 하나. 500자 넘으면 줄 단위로 자동 분할 |
-| `--pdf-url` | 하단 "PDF 보기" 버튼 링크. 메시지의 유일한 버튼이다 |
+| `--pdf` | 첨부할 PDF 경로. 본문 메시지 다음에 **파일로** 전송된다 |
 | `--date` | 기준일 표시 |
 | `--dry-run` | 발송하지 않고 페이로드만 출력 |
 
@@ -154,55 +154,84 @@ python3 scripts/kakaowork_send.py --status unchanged \
 
 ---
 
-## PDF 발송에 대하여
+## PDF 첨부 발송
 
-### 현재 상태 — 링크 방식
+PDF는 **링크가 아니라 파일 첨부**로 전송된다. 카카오워크 API 2단계로 처리한다.
 
-PDF 파일을 메시지에 직접 첨부하는 것이 목표지만, 아직 링크 방식이다. 업로드
-엔드포인트는 **찾았으나 파라미터 스키마를 확정하지 못했다.**
-
-```
-POST /v1/conversations/{conversation_id}/upload
-  → {"error":{"code":"missing_parameter","message":"attachments, metas is missing."}}
-```
-
-- `attachments[]` (multipart 파일) + `metas` (JSON 배열, 파일 개수와 길이 일치) 까지는 확인됨
-- `metas` 원소의 스키마를 못 맞춰 계속 `meta is invalid` 가 난다.
-  `{name,size}` `{type,name,size}` `{content_type}` `{width,height}` `{filename,filesize}`
-  `{}` `null` 등 모두 거부됨
-- 공식 문서 `docs.kakaoi.ai` 가 이그레스 정책에서 차단되어 스키마를 확인할 수 없다.
-  이 도메인을 허용 목록에 추가하면 확정할 수 있다.
-
-`dot` 표기 엔드포인트(`conversations.upload`, `attachments.upload`, `files.upload` 등
-28종)는 모두 `api_not_found` 이므로 경로는 위 RESTful 형태가 맞다.
-
-그동안은 다음 방식을 쓴다.
-
-1. `scripts/make_pdf.py` 로 리포트 HTML을 A4 PDF로 변환
-2. `reports/solar-brief-2026.pdf` 로 공개 리포지토리에 커밋
-3. 카카오워크 메시지에 「PDF 보기」 버튼을 붙여 아래 링크를 연다 (메시지의 유일한 버튼)
+### 1단계 — 사전 업로드
 
 ```
-https://github.com/jaewon19811105-ui/-/blob/HEAD/reports/solar-brief-2026.pdf
+POST https://api.kakaowork.com/v1/conversations/{conversation_id}/upload
+Content-Type: multipart/form-data
 ```
 
-`blob/HEAD` 는 항상 기본 브랜치의 최신 파일을 가리키므로 링크가 고정됩니다. GitHub이
-브라우저에서 PDF를 바로 렌더링하므로 모바일에서도 열립니다. 내려받기 링크가 필요하면
-`https://raw.githubusercontent.com/jaewon19811105-ui/-/HEAD/reports/solar-brief-2026.pdf`
-를 쓰면 됩니다.
+| 파라미터 | 내용 |
+|---|---|
+| `attachments[]` | 파일 바이너리. 최대 5개, 합계 약 1GB |
+| `metas` | JSON 배열. `attachments[]` 와 **순서·개수가 일치**해야 함 |
 
-### PDF 변환 스크립트
+`metas` 원소 필드:
+
+```json
+{"file_name": "solar-brief-2026.pdf", "file_type": "file", "file_size": 2444583}
+```
+
+- `file_name` (필수) — 확장자 포함
+- `file_type` (필수) — `file` / `image` / `video`
+- `file_size` (필수) — 바이트
+- `duration` `width` `height` `rotation` — `video` 일 때만. 없으면 `file` 로 대체
+
+형식별 상한: `file` 약 1GB(전체 확장자) · `image` 15MB(png jpg jpeg gif bmp) ·
+`video` 300MB.
+
+응답에서 `attachments[0].attachment_id` 를 받는다.
+
+### 2단계 — 첨부 메시지 전송
+
+```
+POST https://api.kakaowork.com/v1/messages.send_attachments
+Content-Type: application/json
+
+{"conversation_id": "1006710354409588", "type": "file",
+ "attachment": {"attachment_id": 1006715191869054976}}
+```
+
+`type` 이 `image` 면 `attachment.attachment_ids` (배열), `file`/`video` 면
+`attachment.attachment_id` (단수)를 쓴다.
+
+> **1시간 규칙.** 업로드 후 1시간 안에 메시지에 첨부되지 않은 파일은 미사용으로 간주되어
+> 삭제된다. 스크립트는 업로드 직후 바로 전송하므로 문제되지 않는다.
+
+### 대화방 ID가 반드시 필요하다
+
+업로드 경로에 `conversation_id` 가 들어가므로, 첨부는 `messages.send_by_email` 방식으로는
+보낼 수 없다. 그래서 스크립트는 항상 대화방 ID를 먼저 확정한다.
+
+1. `KAKAOWORK_CONVERSATION_ID` 가 있으면 그 값을 쓴다
+2. 없으면 `KAKAOWORK_EMAIL` → `users.find_by_email` → `conversations.open` 으로
+   1:1 대화방을 열어 그 ID를 쓴다
+
+두 경우 모두 본문은 `messages.send` 로 보낸다.
+
+### 엔드포인트 이름에 대한 주의
+
+문서 목차에는 `conversations.upload` 로 적혀 있지만 **실제 경로는 점(dot) 표기가 아니다.**
+`POST /v1/conversations.upload` 는 `api_not_found` 를 반환한다. 반드시
+`POST /v1/conversations/{conversation_id}/upload` 를 써야 한다.
+
+### PDF 생성
 
 ```bash
 python3 scripts/make_pdf.py reports/solar-brief-2026.html reports/solar-brief-2026.pdf
 ```
 
-헤드리스 Chromium(`/opt/pw-browsers/chromium`)을 씁니다. 원본 HTML에는 `@media print`
+헤드리스 Chromium(`/opt/pw-browsers/chromium`)을 쓴다. 원본 HTML에는 `@media print`
 규칙이 없고 Chromium은 기본적으로 배경색을 인쇄하지 않으므로, 원본을 수정하지 않고
 임시 복사본에 인쇄용 CSS(`print-color-adjust: exact`, 표·제목 페이지 분리 방지,
-A4 여백, 마스트헤드 그리드 폭 조정)를 주입한 뒤 변환합니다.
+A4 여백, 마스트헤드 그리드 폭 조정)를 주입한 뒤 변환한다.
 
----
+> 공식 API 문서는 `docs.kakaoi.ai` 에 있다. 스펙을 다시 확인하려면 환경의
+> Allowed domains 에 이 도메인이 있어야 한다. 발송 자체에는 필요하지 않다.
 
 ## 단체 대화방으로 보내기
 
