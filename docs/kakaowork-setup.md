@@ -150,7 +150,8 @@ python3 scripts/kakaowork_send.py --status unchanged \
 | `KAKAOWORK_APP_KEY 가 설정되어 있지 않습니다` | 환경변수 누락, 또는 설정 전에 시작된 세션에서 실행함 (로컬 export는 루틴에 반영되지 않음) |
 | HTTP 401 / `invalid_token` | App Key 오타, 또는 앱 삭제·재발급됨 |
 | HTTP 400 `invalid_parameter` (email) | 카카오워크에 없는 이메일. 워크스페이스 계정 이메일이어야 함 |
-| 호출은 성공(`success: true`)인데 메시지가 안 옴 | 봇이 비활성 상태거나, 그룹방에 봇이 초대되지 않음 |
+| 호출은 성공(`success: true`)인데 메시지가 안 옴 | ① **다른 사람 계정으로 갔을 가능성** — `KAKAOWORK_EMAIL` 이 본인 이메일인지 확인. `rooms` 명령으로 대화방 상대를 확인한다. ② 카카오톡(KakaoTalk)이 아니라 **카카오워크(Kakao Work)** 앱을 봐야 한다. ③ 봇이 비활성이거나 그룹방에 초대되지 않음 |
+| 어느 방으로 갔는지 모르겠다 | 스크립트가 발송 시 대화방 ID를 출력한다. `python3 scripts/kakaowork_rooms.py rooms` 로 그 ID의 상대를 대조한다 |
 
 ---
 
