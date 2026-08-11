@@ -8,7 +8,13 @@
       "Read",
       "Write",
       "Edit",
-      "Bash(git *)"
+      "Glob",
+      "Grep",
+      "Bash(git *)",
+      "Bash(test:*)",
+      "Bash(python3 scripts/make_pdf.py:*)",
+      "Bash(python3 scripts/kakaowork_send.py:*)",
+      "Bash(python3 scripts/kakaowork_rooms.py:*)"
     ]
   }
 }
